@@ -1,12 +1,6 @@
 export const siteConfig = {
   name: "Gisselle Barreto",
-  title: "Gisselle Barreto · Frontend Engineer",
+  title: "Gisselle Barreto · Software Engineer",
   description:
-    "Portafolio personal de Gisselle Barreto. Frontend en React para portales de producto y movilidad — sin assets confidenciales.",
-  nav: [
-    { href: "#proyectos", label: "Proyectos" },
-    { href: "#caso", label: "Caso" },
-    { href: "#stack", label: "Stack" },
-    { href: "#contacto", label: "Contacto" },
-  ],
+    "Portafolio personal de Gisselle Barreto. Software engineer en React para productos y movilidad.",
 } as const;

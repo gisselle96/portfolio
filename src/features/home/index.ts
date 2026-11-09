@@ -1,13 +1,9 @@
 export {
-  CaseStudy,
+  About,
   Contact,
   Hero,
+  ProfilePhoto,
   Projects,
-  Stack,
+  Skills,
 } from "./components";
-export {
-  caseStudy,
-  profile,
-  projects,
-  stackGroups,
-} from "./constants/content";
+export { profile } from "./constants/content";

@@ -1,74 +1,114 @@
 "use client";
 
-import { useState } from "react";
-import { Menu } from "lucide-react";
-import { siteConfig } from "@/config/site";
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { PreferenceControls } from "@/components/PreferenceControls";
 import { profile } from "@/features/home/constants/content";
-import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-
-const links = siteConfig.nav;
+import { usePreferences } from "@/providers/PreferencesProvider";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const { dict } = usePreferences();
+
+  const links = [
+    { href: "#welcome", label: dict.nav.welcome },
+    { href: "#sobre-mi", label: dict.nav.about },
+    { href: "#proyectos", label: dict.nav.projects },
+    { href: "#skills", label: dict.nav.skills },
+    { href: "#contacto", label: dict.nav.contact },
+  ];
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
-    <header className="absolute inset-x-0 top-0 z-30">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-4 sm:px-8 sm:py-5">
-        <a
-          href="#top"
-          className="font-[family-name:var(--font-display)] text-sm font-bold tracking-tight text-ink"
-          onClick={() => setOpen(false)}
-        >
-          {profile.name}
-        </a>
+    <>
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-transparent bg-bg/90 backdrop-blur-md">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-5 py-3.5 sm:px-8 sm:py-8">
+          <a
+            href="#welcome"
+            className="font-[family-name:var(--font-display)] text-sm font-bold tracking-tight text-ink"
+            onClick={() => setOpen(false)}
+          >
+            {dict.brandLabel}
+          </a>
 
-        <nav className="hidden items-center gap-6 text-sm text-ink-soft md:flex">
-          {links.map((link) => (
-            <a key={link.href} href={link.href} className="nav-link">
-              {link.label}
-            </a>
-          ))}
-        </nav>
+          <nav className="hidden items-center gap-6 text-sm text-ink-soft lg:flex">
+            {links.map((link) => (
+              <a key={link.href} href={link.href} className="nav-link">
+                {link.label}
+              </a>
+            ))}
+          </nav>
 
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild>
-            <Button
-              variant="outline"
-              size="icon"
-              className="md:hidden"
-              aria-label="Abrir menú"
+          <div className="flex items-center gap-2">
+            <PreferenceControls className="hidden sm:flex" />
+            <button
+              type="button"
+              className="inline-flex h-10 w-10 items-center justify-center text-ink lg:hidden"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? dict.a11y.closeMenu : dict.a11y.openMenu}
+              onClick={() => setOpen((value) => !value)}
             >
-              <Menu className="h-4 w-4" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-[min(100%,20rem)]">
-            <SheetHeader>
-              <SheetTitle>{profile.name}</SheetTitle>
-            </SheetHeader>
-            <nav className="mt-4 flex flex-col gap-1 px-2">
-              {links.map((link) => (
-                <Button
-                  key={link.href}
-                  variant="ghost"
-                  className="h-11 justify-start text-base"
-                  asChild
-                >
-                  <a href={link.href} onClick={() => setOpen(false)}>
-                    {link.label}
-                  </a>
-                </Button>
-              ))}
-            </nav>
-          </SheetContent>
-        </Sheet>
-      </div>
-    </header>
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {open ? (
+        <div
+          id="mobile-menu"
+          className="fixed inset-0 z-[60] flex flex-col bg-[var(--bg)] lg:hidden"
+          style={{ backgroundColor: "var(--bg)" }}
+          role="dialog"
+          aria-modal="true"
+          aria-label={dict.a11y.navigation}
+        >
+          <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-5 py-3.5">
+            <a
+              href="#welcome"
+              className="font-[family-name:var(--font-display)] text-sm font-bold tracking-tight text-ink"
+              onClick={() => setOpen(false)}
+            >
+              {dict.brandLabel}
+            </a>
+            <div className="flex items-center gap-2">
+              <PreferenceControls />
+              <button
+                type="button"
+                className="inline-flex h-10 w-10 items-center justify-center text-ink"
+                aria-label={dict.a11y.closeMenu}
+                onClick={() => setOpen(false)}
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+
+          <nav className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-1 overflow-y-auto px-5 pb-10 pt-8">
+            {links.map((link, index) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="border-b border-line py-5 font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight text-ink"
+                onClick={() => setOpen(false)}
+              >
+                <span className="mr-4 font-[family-name:var(--font-mono)] text-xs font-normal tracking-[0.14em] text-brand uppercase">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                {link.label}
+              </a>
+            ))}
+            <p className="mt-auto pt-10 text-sm text-ink-soft">{profile.role}</p>
+          </nav>
+        </div>
+      ) : null}
+    </>
   );
 }

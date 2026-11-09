@@ -1,9 +1,9 @@
 import {
-  CaseStudy,
+  About,
   Contact,
   Hero,
   Projects,
-  Stack,
+  Skills,
 } from "@/features/home";
 import { SiteFooter, SiteHeader } from "@/layouts";
 
@@ -11,11 +11,11 @@ export default function Home() {
   return (
     <>
       <SiteHeader />
-      <main className="flex-1">
+      <main className="relative z-10 flex-1">
         <Hero />
+        <About />
         <Projects />
-        <CaseStudy />
-        <Stack />
+        <Skills />
         <Contact />
       </main>
       <SiteFooter />

@@ -1,25 +1,32 @@
+"use client";
+
 import {
   Code2,
   Database,
   PanelsTopLeft,
   ShieldCheck,
 } from "lucide-react";
-import { stackGroups } from "@/features/home/constants/content";
 import { Separator } from "@/components/ui/separator";
+import { usePreferences } from "@/providers/PreferencesProvider";
 
 const groupIcons = [PanelsTopLeft, Database, Code2, ShieldCheck] as const;
 
-export function Stack() {
+export function Skills() {
+  const { dict } = usePreferences();
+  const { skills } = dict;
+
   return (
     <section
-      id="stack"
-      className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24"
+      id="skills"
+      className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-8"
     >
-      <p className="section-kicker">03 · Stack</p>
-      <h2 className="section-title">Herramientas con las que construyo.</h2>
+      <Separator className="mb-10 sm:mb-12" />
+      <p className="section-kicker">{skills.kicker}</p>
+      <h2 className="section-title max-w-2xl lg:max-w-none">{skills.title}</h2>
+      <p className="mt-4 max-w-2xl text-ink-soft lg:max-w-none">{skills.intro}</p>
 
       <div className="mt-12 grid gap-8 sm:grid-cols-2">
-        {stackGroups.map((group, index) => {
+        {skills.groups.map((group, index) => {
           const Icon = groupIcons[index] ?? Code2;
 
           return (

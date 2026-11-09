@@ -1,6 +1,6 @@
-export { CaseStudy } from "./CaseStudy";
+export { About } from "./About";
 export { Contact } from "./Contact";
 export { Hero } from "./Hero";
-export { HeroMap } from "./HeroMap";
+export { ProfilePhoto } from "./ProfilePhoto";
 export { Projects } from "./Projects";
-export { Stack } from "./Stack";
+export { Skills } from "./Skills";

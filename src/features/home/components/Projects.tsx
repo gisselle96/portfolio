@@ -1,59 +1,83 @@
-import { ArrowUpRight, Boxes, LayoutDashboard, Map } from "lucide-react";
-import { projects } from "@/features/home/constants/content";
+"use client";
+
+import {
+  ArrowUpRight,
+  Boxes,
+  BriefcaseBusiness,
+  LayoutDashboard,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { usePreferences } from "@/providers/PreferencesProvider";
 
-const projectIcons = [LayoutDashboard, Map, Boxes] as const;
+const projectIcons = [LayoutDashboard, BriefcaseBusiness, Boxes] as const;
 
 export function Projects() {
+  const { dict } = usePreferences();
+  const { projects } = dict;
+
   return (
     <section
       id="proyectos"
-      className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24"
+      className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-8"
     >
-      <p className="section-kicker">01 · Proyectos propios</p>
-      <h2 className="section-title max-w-2xl">
-        Piezas personales que demuestran el craft — sin código del cliente.
-      </h2>
-      <p className="mt-4 max-w-2xl text-ink-soft">
-        Reemplazá los links cuando los publiques. Cada uno replica patrones del
-        trabajo real con datos inventados.
-      </p>
+      <Separator className="mb-10 sm:mb-12" />
+      <p className="section-kicker">{projects.kicker}</p>
+      <h2 className="section-title max-w-2xl lg:max-w-none">{projects.title}</h2>
+      <p className="mt-4 max-w-2xl text-ink-soft lg:max-w-none">{projects.intro}</p>
 
-      <div className="mt-12">
-        <Separator />
-        {projects.map((project, index) => {
+      <div className="project-list mt-12 border-t border-line">
+        {projects.items.map((project, index) => {
           const Icon = projectIcons[index] ?? Boxes;
+          const isPublic = Boolean(project.href);
+
+          const content = (
+            <>
+              <Icon
+                className="project-icon h-7 w-7 text-brand"
+                strokeWidth={2.15}
+              />
+              <div>
+                <h3 className="project-title flex items-center gap-2 font-[family-name:var(--font-display)] text-xl font-bold tracking-tight sm:text-2xl">
+                  {project.title}
+                  {isPublic ? (
+                    <ArrowUpRight className="h-4 w-4 shrink-0 text-ink-soft" />
+                  ) : null}
+                </h3>
+                <Badge className="mt-2 uppercase">{project.status}</Badge>
+              </div>
+              <p className="project-summary text-[0.98rem] leading-relaxed text-ink-soft">
+                {project.summary}
+              </p>
+              <ul className="flex flex-wrap gap-x-3 gap-y-1 text-sm text-primary sm:justify-end">
+                {project.stack.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </>
+          );
+
+          if (isPublic) {
+            return (
+              <a
+                key={project.title}
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-row grid-cols-1 border-0 sm:grid-cols-[auto_minmax(0,1.1fr)_minmax(0,1.4fr)_auto] sm:items-center"
+              >
+                {content}
+              </a>
+            );
+          }
 
           return (
-            <div key={project.title}>
-              <a
-                href={project.href}
-                className="project-row grid-cols-1 border-0 sm:grid-cols-[auto_minmax(0,1.1fr)_minmax(0,1.4fr)_auto] sm:items-start"
-              >
-                <div className="flex h-10 w-10 items-center justify-center border border-line bg-bg-elevated/70 text-brand">
-                  <Icon className="h-4 w-4" />
-                </div>
-                <div>
-                  <h3 className="flex items-center gap-2 font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight">
-                    {project.title}
-                    <ArrowUpRight className="h-4 w-4 shrink-0 text-ink-soft" />
-                  </h3>
-                  <Badge variant="secondary" className="mt-2 uppercase">
-                    {project.status}
-                  </Badge>
-                </div>
-                <p className="text-[0.98rem] leading-relaxed text-ink-soft">
-                  {project.summary}
-                </p>
-                <ul className="flex flex-wrap gap-x-3 gap-y-1 text-sm text-ink sm:justify-end">
-                  {project.stack.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </a>
-              <Separator />
-            </div>
+            <article
+              key={project.title}
+              className="project-row grid-cols-1 border-0 sm:grid-cols-[auto_minmax(0,1.1fr)_minmax(0,1.4fr)_auto] sm:items-center"
+            >
+              {content}
+            </article>
           );
         })}
       </div>
