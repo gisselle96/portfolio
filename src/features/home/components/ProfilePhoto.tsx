@@ -74,7 +74,7 @@ export function ProfilePhoto() {
         >
           <Mail className="h-6 w-6" strokeWidth={2} />
           <span
-            className={`pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink px-2.5 py-1 text-xs text-white transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 ${
+            className={`pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-line bg-bg-elevated px-2.5 py-1 text-xs text-ink shadow-md transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 ${
               copied ? "opacity-100" : "opacity-0"
             }`}
           >
