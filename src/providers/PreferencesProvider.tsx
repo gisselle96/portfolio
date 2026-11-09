@@ -4,7 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
-  useLayoutEffect,
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -56,25 +56,20 @@ function applyLocale(locale: Locale) {
 
 export function PreferencesProvider({
   children,
-  initialTheme = "light",
-  initialLocale = "es",
 }: {
   children: React.ReactNode;
-  initialTheme?: Theme;
-  initialLocale?: Locale;
 }) {
-  const [theme, setThemeState] = useState<Theme>(initialTheme);
-  const [locale, setLocaleState] = useState<Locale>(initialLocale);
+  // Keep SSR and the first client render identical (es / light).
+  const [theme, setThemeState] = useState<Theme>("light");
+  const [locale, setLocaleState] = useState<Locale>("es");
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const nextTheme = readTheme();
     const nextLocale = readLocale();
     writeCookie(THEME_KEY, nextTheme);
     writeCookie(LOCALE_KEY, nextLocale);
     applyTheme(nextTheme);
     applyLocale(nextLocale);
-
-    // Defer React updates until after hydration so SSR defaults stay matched.
     queueMicrotask(() => {
       setThemeState(nextTheme);
       setLocaleState(nextLocale);

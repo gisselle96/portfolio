@@ -42,7 +42,7 @@ export function Hero() {
   return (
     <section
       id="welcome"
-      className="relative z-10 flex min-h-[100svh] items-end overflow-hidden pb-14 pt-28 sm:items-center sm:pb-20 sm:pt-24"
+      className="relative z-10 flex min-h-[100svh] items-end overflow-x-clip pb-14 pt-28 sm:items-center sm:pb-20 sm:pt-24"
     >
       <div className="relative mx-auto grid w-full max-w-6xl items-start gap-8 px-5 sm:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center lg:gap-12">
         <div className="relative z-10 min-w-0">
@@ -68,8 +68,8 @@ export function Hero() {
           <Image
             src={profile.heroVisualPath}
             alt=""
-            width={1200}
-            height={675}
+            width={1536}
+            height={1024}
             priority
             sizes="(max-width: 1024px) 90vw, 42vw"
             className="h-auto w-full object-contain"

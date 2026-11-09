@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { cookies } from "next/headers";
 import { Roboto, Roboto_Mono } from "next/font/google";
 import { SiteBackground } from "@/components/SiteBackground";
 import { siteConfig } from "@/config/site";
@@ -9,7 +8,6 @@ import {
   PreferencesProvider,
   THEME_KEY,
 } from "@/providers/PreferencesProvider";
-import type { Locale, Theme } from "@/i18n/types";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -38,40 +36,29 @@ export const viewport: Viewport = {
   ],
 };
 
+// Apply theme/locale before paint; keep SSR text on defaults to avoid hydration mismatch.
 const themeInitScript = `(function(){try{var t=localStorage.getItem('${THEME_KEY}');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}var r=document.documentElement;r.classList.toggle('dark',t==='dark');r.style.colorScheme=t;document.cookie='${THEME_KEY}='+t+';path=/;max-age=31536000;samesite=lax';var l=localStorage.getItem('${LOCALE_KEY}');if(l==='en'||l==='es'){r.lang=l;document.cookie='${LOCALE_KEY}='+l+';path=/;max-age=31536000;samesite=lax'}}catch(e){}})();`;
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
-  const themeCookie = cookieStore.get(THEME_KEY)?.value;
-  const localeCookie = cookieStore.get(LOCALE_KEY)?.value;
-  const initialTheme: Theme =
-    themeCookie === "dark" || themeCookie === "light" ? themeCookie : "light";
-  const initialLocale: Locale =
-    localeCookie === "en" || localeCookie === "es" ? localeCookie : "es";
-
   return (
     <html
-      lang={initialLocale}
+      lang="es"
       suppressHydrationWarning
       className={cn(
         "h-full antialiased font-sans",
         roboto.variable,
         robotoMono.variable,
-        initialTheme === "dark" && "dark",
       )}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="site-shell relative flex min-h-full flex-col font-sans">
-        <PreferencesProvider
-          initialTheme={initialTheme}
-          initialLocale={initialLocale}
-        >
+        <PreferencesProvider>
           <SiteBackground />
           <div className="relative z-10 flex min-h-full flex-1 flex-col">
             {children}
