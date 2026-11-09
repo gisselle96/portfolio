@@ -163,6 +163,9 @@ const es = {
     send: "Enviar mensaje",
     sending: "Enviando...",
     success: "Mensaje enviado. Te respondo pronto.",
+    captchaRequired: "No se pudo verificar el captcha. Probá de nuevo.",
+    networkError: "Error de red. Intentá de nuevo.",
+    captchaNotice: "Este sitio está protegido por reCAPTCHA.",
   },
   footer: {
     portfolio: "Portafolio personal",
@@ -328,6 +331,9 @@ const en = {
     send: "Send message",
     sending: "Sending...",
     success: "Message sent. I’ll reply soon.",
+    captchaRequired: "Captcha verification failed. Please try again.",
+    networkError: "Network error. Please try again.",
+    captchaNotice: "This site is protected by reCAPTCHA.",
   },
   footer: {
     portfolio: "Personal portfolio",

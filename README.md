@@ -2,7 +2,7 @@
 
 Sitio personal de Software Engineer (frontend). Next.js 16, React 19, Tailwind 4, shadcn/ui.
 
-Incluye tema claro/oscuro, español/inglés, secciones Welcome · Sobre mí · Proyectos · Skills · Contacto, CV descargable y formulario de contacto.
+Incluye tema claro/oscuro (oscuro por defecto), español/inglés, secciones Welcome · Sobre mí · Proyectos · Skills · Contacto, CV descargable y formulario de contacto con reCAPTCHA v3 y toasts.
 
 ## Stack
 
@@ -10,6 +10,8 @@ Incluye tema claro/oscuro, español/inglés, secciones Welcome · Sobre mí · P
 - Tailwind CSS + shadcn/ui
 - Vitest + Testing Library
 - Yarn 4
+- reCAPTCHA v3 + FormSubmit (contacto)
+- Sonner (toasts)
 
 ## Estructura
 
@@ -24,22 +26,24 @@ src/
   i18n/                # diccionarios ES/EN
   layouts/             # SiteHeader / SiteFooter
   providers/           # tema + idioma (localStorage)
-  lib/                 # utils
+  lib/                 # utils + reCAPTCHA
 public/
   cv/                  # PDF del CV
   hero/                # visual del hero
   profile/             # foto de perfil
 ```
 
-
 ## Desarrollo
 
 ```bash
 yarn
+cp .env.example .env.local   # opcional: keys reales de reCAPTCHA v3
 yarn dev
 ```
 
 Abrí [http://127.0.0.1:3000](http://127.0.0.1:3000).
+
+Sin keys en `.env.local`, el contacto usa las [keys de prueba de Google](https://developers.google.com/recaptcha/docs/faq) (siempre pasan).
 
 ## Scripts
 
@@ -56,7 +60,12 @@ Abrí [http://127.0.0.1:3000](http://127.0.0.1:3000).
 
 Hay un workflow de GitHub Actions (`.github/workflows/ci.yml`) que corre `yarn verify` en push/PR a `main`/`master`.
 
-Para el deploy: si usás Vercel, el CD ya lo hace Vercel al pushear. No hace falta un pipeline de deploy aparte.
+Para el deploy: si usás Vercel, el CD lo hace Vercel al pushear. Configurá en Vercel:
+
+- `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`
+- `RECAPTCHA_SECRET_KEY`
+
+Las keys deben ser **reCAPTCHA v3** y el dominio de Vercel (más `localhost` / `127.0.0.1` si las usás local) tiene que estar en la [consola de reCAPTCHA](https://www.google.com/recaptcha/admin).
 
 ## Contenido editable
 
@@ -70,8 +79,8 @@ Los proyectos listados (Admin Portal, Business Portal, Design System Web) son de
 
 ## Contacto
 
-El formulario POST a `/api/contact` y reenvía a FormSubmit con `profile.email`. La primera vez hay que confirmar el correo en FormSubmit.
+El formulario POST a `/api/contact`: verifica reCAPTCHA v3, aplica honeypot y reenvía a FormSubmit con `profile.email`. La primera vez hay que confirmar el correo en FormSubmit (Activate Form). Feedback al usuario con toasts (Sonner).
 
 ## Preferencias
 
-Tema e idioma se guardan en `localStorage` (`portfolio-theme`, `portfolio-locale`). El layout aplica el tema antes del hydrate para evitar flash.
+Tema e idioma se guardan en `localStorage` (`portfolio-theme`, `portfolio-locale`). Sin preferencia previa, el tema por defecto es oscuro. El layout aplica el tema antes del hydrate para evitar flash.

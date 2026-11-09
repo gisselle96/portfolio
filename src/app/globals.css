@@ -118,9 +118,14 @@ body {
   color: var(--ink);
   font-family: var(--font-body), system-ui, sans-serif;
   text-rendering: optimizeLegibility;
-  overflow-x: clip;
+  overflow-x: hidden;
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
+}
+
+/* Hide v3 badge; attribution text is in the contact form (Google policy). */
+.grecaptcha-badge {
+  visibility: hidden !important;
 }
 
 ::selection {
@@ -142,8 +147,7 @@ body {
 
 .site-shell {
   position: relative;
-  isolation: isolate;
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 /* Shared page width: uses more of the viewport on desktop without edge-to-edge text. */

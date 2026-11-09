@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Roboto, Roboto_Mono } from "next/font/google";
 import { SiteBackground } from "@/components/SiteBackground";
+import { Toaster } from "@/components/ui/sonner";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import {
@@ -37,7 +38,7 @@ export const viewport: Viewport = {
 };
 
 // Apply theme/locale before paint; keep SSR text on defaults to avoid hydration mismatch.
-const themeInitScript = `(function(){try{var t=localStorage.getItem('${THEME_KEY}');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}var r=document.documentElement;r.classList.toggle('dark',t==='dark');r.style.colorScheme=t;document.cookie='${THEME_KEY}='+t+';path=/;max-age=31536000;samesite=lax';var l=localStorage.getItem('${LOCALE_KEY}');if(l==='en'||l==='es'){r.lang=l;document.cookie='${LOCALE_KEY}='+l+';path=/;max-age=31536000;samesite=lax'}}catch(e){}})();`;
+const themeInitScript = `(function(){try{var t=localStorage.getItem('${THEME_KEY}');if(t!=='light'&&t!=='dark'){t='dark'}var r=document.documentElement;r.classList.toggle('dark',t==='dark');r.style.colorScheme=t;document.cookie='${THEME_KEY}='+t+';path=/;max-age=31536000;samesite=lax';var l=localStorage.getItem('${LOCALE_KEY}');if(l==='en'||l==='es'){r.lang=l;document.cookie='${LOCALE_KEY}='+l+';path=/;max-age=31536000;samesite=lax'}}catch(e){}})();`;
 
 export default function RootLayout({
   children,
@@ -49,7 +50,7 @@ export default function RootLayout({
       lang="es"
       suppressHydrationWarning
       className={cn(
-        "h-full antialiased font-sans",
+        "dark h-full antialiased font-sans",
         roboto.variable,
         robotoMono.variable,
       )}
@@ -63,6 +64,7 @@ export default function RootLayout({
           <div className="relative z-10 flex min-h-full flex-1 flex-col">
             {children}
           </div>
+          <Toaster />
         </PreferencesProvider>
       </body>
     </html>

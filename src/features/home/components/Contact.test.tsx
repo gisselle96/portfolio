@@ -1,6 +1,7 @@
 import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { toast } from "sonner";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { dictionaries } from "@/i18n/dictionaries";
 import { renderWithPreferences } from "@/test/renderWithPreferences";
 import { Contact } from "./Contact";
@@ -22,9 +23,17 @@ async function fillAndSubmit() {
 }
 
 describe("Contact", () => {
+  beforeEach(() => {
+    window.grecaptcha = {
+      ready: (callback) => callback(),
+      execute: vi.fn().mockResolvedValue("test-captcha-token"),
+    };
+  });
+
   afterEach(() => {
     vi.unstubAllGlobals();
     vi.restoreAllMocks();
+    delete window.grecaptcha;
   });
 
   it("renders contact form fields", () => {
@@ -37,7 +46,9 @@ describe("Contact", () => {
     ).toBeInTheDocument();
   });
 
-  it("shows success after a successful submit", async () => {
+  it("shows success toast after a successful submit", async () => {
+    const successSpy = vi.spyOn(toast, "success");
+    const errorSpy = vi.spyOn(toast, "error");
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ({}),
@@ -47,25 +58,28 @@ describe("Contact", () => {
     renderWithPreferences(<Contact />);
     await fillAndSubmit();
 
-    expect(await screen.findByRole("status")).toHaveTextContent(contact.success);
+    await waitFor(() => {
+      expect(successSpy).toHaveBeenCalledWith(contact.success);
+    });
+    expect(errorSpy).not.toHaveBeenCalled();
     expect(fetchMock).toHaveBeenCalledWith(
       "/api/contact",
       expect.objectContaining({
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: "Ana",
           email: "ana@mail.com",
           message: "Hola, me interesa tu perfil",
+          company: "",
+          captchaToken: "test-captcha-token",
         }),
       }),
     );
-    await waitFor(() => {
-      expect(screen.getByRole("textbox", { name: /nombre/i })).toHaveValue("");
-    });
   });
 
-  it("shows api error message when the request fails", async () => {
+  it("shows error toast when the request fails", async () => {
+    const errorSpy = vi.spyOn(toast, "error");
+
     vi.stubGlobal(
       "fetch",
       vi.fn().mockResolvedValue({
@@ -77,19 +91,23 @@ describe("Contact", () => {
     renderWithPreferences(<Contact />);
     await fillAndSubmit();
 
-    expect(await screen.findByRole("alert")).toHaveTextContent(
-      "Completá nombre, email y mensaje.",
-    );
+    await waitFor(() => {
+      expect(errorSpy).toHaveBeenCalledWith("Completá nombre, email y mensaje.");
+    });
   });
 
-  it("shows network error when fetch throws", async () => {
-    vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("offline")));
+  it("shows captcha toast when token is missing", async () => {
+    window.grecaptcha = {
+      ready: (callback) => callback(),
+      execute: vi.fn().mockResolvedValue(""),
+    };
+    const errorSpy = vi.spyOn(toast, "error");
 
     renderWithPreferences(<Contact />);
     await fillAndSubmit();
 
-    expect(await screen.findByRole("alert")).toHaveTextContent(
-      "Error de red. Intentá de nuevo.",
-    );
+    await waitFor(() => {
+      expect(errorSpy).toHaveBeenCalledWith(contact.captchaRequired);
+    });
   });
 });

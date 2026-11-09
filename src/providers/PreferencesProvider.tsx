@@ -33,9 +33,7 @@ function readTheme(): Theme {
   const stored = window.localStorage.getItem(THEME_KEY);
   if (stored === "dark" || stored === "light") return stored;
   if (document.documentElement.classList.contains("dark")) return "dark";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  return "dark";
 }
 
 function readLocale(): Locale {
@@ -59,8 +57,8 @@ export function PreferencesProvider({
 }: {
   children: React.ReactNode;
 }) {
-  // Keep SSR and the first client render identical (es / light).
-  const [theme, setThemeState] = useState<Theme>("light");
+  // Keep SSR and the first client render identical (es / dark).
+  const [theme, setThemeState] = useState<Theme>("dark");
   const [locale, setLocaleState] = useState<Locale>("es");
 
   useEffect(() => {

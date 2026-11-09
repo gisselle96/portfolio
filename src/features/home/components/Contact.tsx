@@ -1,30 +1,60 @@
 "use client";
 
 import { useState } from "react";
+import Script from "next/script";
 import { Send } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
+import { getRecaptchaSiteKey, RECAPTCHA_ACTION } from "@/lib/recaptcha";
 import { usePreferences } from "@/providers/PreferencesProvider";
 import { ProfilePhoto } from "./ProfilePhoto";
 
-type FormStatus = "idle" | "loading" | "success" | "error";
+type FormStatus = "idle" | "loading";
+
+async function getCaptchaToken(siteKey: string) {
+  const api = window.grecaptcha;
+  if (!api?.execute) {
+    return "";
+  }
+
+  await new Promise<void>((resolve) => {
+    api.ready(() => resolve());
+  });
+
+  return api.execute(siteKey, { action: RECAPTCHA_ACTION });
+}
 
 export function Contact() {
   const { dict } = usePreferences();
   const { contact } = dict;
   const [status, setStatus] = useState<FormStatus>("idle");
-  const [errorMessage, setErrorMessage] = useState("");
+  const siteKey = getRecaptchaSiteKey();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("loading");
-    setErrorMessage("");
 
     const form = event.currentTarget;
     const formData = new FormData(form);
+
+    let captchaToken = "";
+    try {
+      captchaToken = await getCaptchaToken(siteKey);
+    } catch {
+      toast.error(contact.captchaRequired);
+      setStatus("idle");
+      return;
+    }
+
+    if (!captchaToken) {
+      toast.error(contact.captchaRequired);
+      setStatus("idle");
+      return;
+    }
 
     try {
       const response = await fetch("/api/contact", {
@@ -34,22 +64,25 @@ export function Contact() {
           name: String(formData.get("name") ?? ""),
           email: String(formData.get("email") ?? ""),
           message: String(formData.get("message") ?? ""),
+          company: String(formData.get("company") ?? ""),
+          captchaToken,
         }),
       });
 
       const payload = (await response.json()) as { error?: string };
 
       if (!response.ok) {
-        setStatus("error");
-        setErrorMessage(payload.error ?? "No se pudo enviar el mensaje.");
+        toast.error(payload.error ?? "No se pudo enviar el mensaje.");
+        setStatus("idle");
         return;
       }
 
       form.reset();
-      setStatus("success");
+      toast.success(contact.success);
+      setStatus("idle");
     } catch {
-      setStatus("error");
-      setErrorMessage("Error de red. Intentá de nuevo.");
+      toast.error(contact.networkError);
+      setStatus("idle");
     }
   }
 
@@ -58,6 +91,10 @@ export function Contact() {
       id="contacto"
       className="site-container py-16 sm:py-8"
     >
+      <Script
+        src={`https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(siteKey)}`}
+        strategy="afterInteractive"
+      />
       <Separator className="mb-10 sm:mb-12" />
       <p className="section-kicker">{contact.kicker}</p>
       <h2 className="section-title max-w-3xl lg:max-w-none lg:text-[clamp(2rem,2.8vw,2.85rem)]">
@@ -68,8 +105,16 @@ export function Contact() {
       </p>
       <div className="mt-6 grid gap-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.7fr)] md:items-center md:gap-12 lg:gap-16">
         <div>
-
           <form onSubmit={handleSubmit} className="mt-10 space-y-5">
+            <input
+              type="text"
+              name="company"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute -left-[9999px] h-0 w-0 opacity-0"
+            />
+
             <div className="space-y-2">
               <Label htmlFor="name">{contact.name}</Label>
               <Input
@@ -115,16 +160,26 @@ export function Contact() {
               {status === "loading" ? contact.sending : contact.send}
             </Button>
 
-            {status === "success" ? (
-              <p className="text-sm text-brand" role="status">
-                {contact.success}
-              </p>
-            ) : null}
-            {status === "error" ? (
-              <p className="text-sm text-red-700 dark:text-red-400" role="alert">
-                {errorMessage}
-              </p>
-            ) : null}
+            <p className="text-xs leading-relaxed text-ink-soft">
+              {contact.captchaNotice}{" "}
+              <a
+                href="https://policies.google.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-ink"
+              >
+                Privacy
+              </a>
+              {" · "}
+              <a
+                href="https://policies.google.com/terms"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-ink"
+              >
+                Terms
+              </a>
+            </p>
           </form>
         </div>
 
