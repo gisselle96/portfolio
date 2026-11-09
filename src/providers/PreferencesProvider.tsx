@@ -4,14 +4,15 @@ import {
   createContext,
   useCallback,
   useContext,
+  useLayoutEffect,
   useMemo,
-  useSyncExternalStore,
+  useState,
 } from "react";
 import { getDictionary, type Dictionary } from "@/i18n/dictionaries";
 import type { Locale, Theme } from "@/i18n/types";
 
-const THEME_KEY = "portfolio-theme";
-const LOCALE_KEY = "portfolio-locale";
+export const THEME_KEY = "portfolio-theme";
+export const LOCALE_KEY = "portfolio-locale";
 
 type PreferencesContextValue = {
   theme: Theme;
@@ -24,21 +25,8 @@ type PreferencesContextValue = {
 
 const PreferencesContext = createContext<PreferencesContextValue | null>(null);
 
-type PrefsSnapshot = {
-  theme: Theme;
-  locale: Locale;
-};
-
-const listeners = new Set<() => void>();
-let snapshot: PrefsSnapshot = { theme: "light", locale: "es" };
-
-function emit() {
-  listeners.forEach((listener) => listener());
-}
-
-function subscribe(listener: () => void) {
-  listeners.add(listener);
-  return () => listeners.delete(listener);
+function writeCookie(key: string, value: string) {
+  document.cookie = `${key}=${value};path=/;max-age=31536000;samesite=lax`;
 }
 
 function readTheme(): Theme {
@@ -56,23 +44,6 @@ function readLocale(): Locale {
   return document.documentElement.lang === "en" ? "en" : "es";
 }
 
-function refreshSnapshot(): PrefsSnapshot {
-  const theme = readTheme();
-  const locale = readLocale();
-  if (snapshot.theme !== theme || snapshot.locale !== locale) {
-    snapshot = { theme, locale };
-  }
-  return snapshot;
-}
-
-function getClientSnapshot(): PrefsSnapshot {
-  return refreshSnapshot();
-}
-
-function getServerSnapshot(): PrefsSnapshot {
-  return snapshot;
-}
-
 function applyTheme(theme: Theme) {
   const root = document.documentElement;
   root.classList.toggle("dark", theme === "dark");
@@ -85,20 +56,36 @@ function applyLocale(locale: Locale) {
 
 export function PreferencesProvider({
   children,
+  initialTheme = "light",
+  initialLocale = "es",
 }: {
   children: React.ReactNode;
+  initialTheme?: Theme;
+  initialLocale?: Locale;
 }) {
-  const { theme, locale } = useSyncExternalStore(
-    subscribe,
-    getClientSnapshot,
-    getServerSnapshot,
-  );
+  const [theme, setThemeState] = useState<Theme>(initialTheme);
+  const [locale, setLocaleState] = useState<Locale>(initialLocale);
+
+  useLayoutEffect(() => {
+    const nextTheme = readTheme();
+    const nextLocale = readLocale();
+    writeCookie(THEME_KEY, nextTheme);
+    writeCookie(LOCALE_KEY, nextLocale);
+    applyTheme(nextTheme);
+    applyLocale(nextLocale);
+
+    // Defer React updates until after hydration so SSR defaults stay matched.
+    queueMicrotask(() => {
+      setThemeState(nextTheme);
+      setLocaleState(nextLocale);
+    });
+  }, []);
 
   const setTheme = useCallback((next: Theme) => {
     window.localStorage.setItem(THEME_KEY, next);
+    writeCookie(THEME_KEY, next);
     applyTheme(next);
-    refreshSnapshot();
-    emit();
+    setThemeState(next);
   }, []);
 
   const toggleTheme = useCallback(() => {
@@ -107,9 +94,9 @@ export function PreferencesProvider({
 
   const setLocale = useCallback((next: Locale) => {
     window.localStorage.setItem(LOCALE_KEY, next);
+    writeCookie(LOCALE_KEY, next);
     applyLocale(next);
-    refreshSnapshot();
-    emit();
+    setLocaleState(next);
   }, []);
 
   const value = useMemo<PreferencesContextValue>(

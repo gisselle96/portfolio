@@ -1,9 +1,15 @@
 import type { Metadata, Viewport } from "next";
+import { cookies } from "next/headers";
 import { Roboto, Roboto_Mono } from "next/font/google";
 import { SiteBackground } from "@/components/SiteBackground";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { PreferencesProvider } from "@/providers/PreferencesProvider";
+import {
+  LOCALE_KEY,
+  PreferencesProvider,
+  THEME_KEY,
+} from "@/providers/PreferencesProvider";
+import type { Locale, Theme } from "@/i18n/types";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -32,24 +38,40 @@ export const viewport: Viewport = {
   ],
 };
 
-const themeInitScript = `(function(){try{var t=localStorage.getItem('portfolio-theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}var r=document.documentElement;r.classList.toggle('dark',t==='dark');r.style.colorScheme=t;var l=localStorage.getItem('portfolio-locale');if(l==='en'||l==='es'){r.lang=l}}catch(e){}})();`;
+const themeInitScript = `(function(){try{var t=localStorage.getItem('${THEME_KEY}');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}var r=document.documentElement;r.classList.toggle('dark',t==='dark');r.style.colorScheme=t;document.cookie='${THEME_KEY}='+t+';path=/;max-age=31536000;samesite=lax';var l=localStorage.getItem('${LOCALE_KEY}');if(l==='en'||l==='es'){r.lang=l;document.cookie='${LOCALE_KEY}='+l+';path=/;max-age=31536000;samesite=lax'}}catch(e){}})();`;
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  const cookieStore = await cookies();
+  const themeCookie = cookieStore.get(THEME_KEY)?.value;
+  const localeCookie = cookieStore.get(LOCALE_KEY)?.value;
+  const initialTheme: Theme =
+    themeCookie === "dark" || themeCookie === "light" ? themeCookie : "light";
+  const initialLocale: Locale =
+    localeCookie === "en" || localeCookie === "es" ? localeCookie : "es";
+
   return (
     <html
-      lang="es"
+      lang={initialLocale}
       suppressHydrationWarning
       className={cn(
         "h-full antialiased font-sans",
         roboto.variable,
         robotoMono.variable,
+        initialTheme === "dark" && "dark",
       )}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="site-shell relative flex min-h-full flex-col font-sans">
-        <PreferencesProvider>
+        <PreferencesProvider
+          initialTheme={initialTheme}
+          initialLocale={initialLocale}
+        >
           <SiteBackground />
           <div className="relative z-10 flex min-h-full flex-1 flex-col">
             {children}
