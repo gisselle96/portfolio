@@ -15,17 +15,32 @@ import { ProfilePhoto } from "./ProfilePhoto";
 
 type FormStatus = "idle" | "loading";
 
+async function waitForGrecaptcha(timeoutMs = 8000) {
+  const started = Date.now();
+  while (Date.now() - started < timeoutMs) {
+    if (window.grecaptcha?.execute) {
+      return window.grecaptcha;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }
+  return null;
+}
+
 async function getCaptchaToken(siteKey: string) {
-  const api = window.grecaptcha;
+  const api = await waitForGrecaptcha();
   if (!api?.execute) {
-    return "";
+    throw new Error("recaptcha-unavailable");
   }
 
   await new Promise<void>((resolve) => {
     api.ready(() => resolve());
   });
 
-  return api.execute(siteKey, { action: RECAPTCHA_ACTION });
+  const token = await api.execute(siteKey, { action: RECAPTCHA_ACTION });
+  if (!token) {
+    throw new Error("recaptcha-empty-token");
+  }
+  return token;
 }
 
 export function Contact() {
