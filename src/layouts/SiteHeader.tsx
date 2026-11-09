@@ -28,7 +28,7 @@ export function SiteHeader() {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-40 border-b border-transparent bg-bg/90 backdrop-blur-md">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-5 py-3.5 sm:px-8 sm:py-8">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-5 py-3.5 sm:px-8 sm:py-4">
           <a
             href="#welcome"
             className="font-[family-name:var(--font-display)] text-sm font-bold tracking-tight text-ink"
