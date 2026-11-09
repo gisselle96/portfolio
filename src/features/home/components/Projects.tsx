@@ -19,7 +19,7 @@ export function Projects() {
   return (
     <section
       id="proyectos"
-      className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-8"
+      className="site-container pt-16 sm:py-8"
     >
       <Separator className="mb-10 sm:mb-12" />
       <p className="section-kicker">{projects.kicker}</p>
@@ -33,18 +33,22 @@ export function Projects() {
 
           const content = (
             <>
-              <Icon
-                className="project-icon h-7 w-7 text-brand"
-                strokeWidth={2.15}
-              />
-              <div>
-                <h3 className="project-title flex items-center gap-2 font-[family-name:var(--font-display)] text-xl font-bold tracking-tight sm:text-2xl">
-                  {project.title}
-                  {isPublic ? (
-                    <ArrowUpRight className="h-4 w-4 shrink-0 text-ink-soft" />
-                  ) : null}
-                </h3>
-                <Badge className="mt-2 uppercase">{project.status}</Badge>
+              <div className="flex min-w-0 items-start gap-3 sm:contents">
+                <Icon
+                  className="project-icon mt-0.5 h-7 w-7 shrink-0 text-brand"
+                  strokeWidth={2.15}
+                />
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
+                    <h3 className="project-title flex min-w-0 items-center gap-2 font-[family-name:var(--font-display)] text-xl font-bold tracking-tight sm:text-2xl">
+                      {project.title}
+                      {isPublic ? (
+                        <ArrowUpRight className="h-4 w-4 shrink-0 text-ink-soft" />
+                      ) : null}
+                    </h3>
+                    <Badge className="shrink-0 uppercase">{project.status}</Badge>
+                  </div>
+                </div>
               </div>
               <p className="project-summary text-[0.98rem] leading-relaxed text-ink-soft">
                 {project.summary}

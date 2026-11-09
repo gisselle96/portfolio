@@ -28,7 +28,7 @@ export function SiteHeader() {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-40 border-b border-transparent bg-bg/90 backdrop-blur-md">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-5 py-3.5 sm:px-8 sm:py-4">
+        <div className="site-container flex items-center justify-between gap-3 py-2 sm:py-3.5 lg:py-4">
           <a
             href="#welcome"
             className="font-[family-name:var(--font-display)] text-sm font-bold tracking-tight text-ink"
@@ -49,7 +49,7 @@ export function SiteHeader() {
             <PreferenceControls className="hidden sm:flex" />
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center text-ink lg:hidden"
+              className="inline-flex h-8 w-8 items-center justify-center text-ink sm:h-10 sm:w-10 lg:hidden"
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? dict.a11y.closeMenu : dict.a11y.openMenu}
@@ -70,7 +70,7 @@ export function SiteHeader() {
           aria-modal="true"
           aria-label={dict.a11y.navigation}
         >
-          <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-5 py-3.5">
+          <div className="site-container flex items-center justify-between gap-3 py-2 sm:py-3.5">
             <a
               href="#welcome"
               className="font-[family-name:var(--font-display)] text-sm font-bold tracking-tight text-ink"
@@ -82,7 +82,7 @@ export function SiteHeader() {
               <PreferenceControls />
               <button
                 type="button"
-                className="inline-flex h-10 w-10 items-center justify-center text-ink"
+                className="inline-flex h-8 w-8 items-center justify-center text-ink sm:h-10 sm:w-10"
                 aria-label={dict.a11y.closeMenu}
                 onClick={() => setOpen(false)}
               >
@@ -91,7 +91,7 @@ export function SiteHeader() {
             </div>
           </div>
 
-          <nav className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-1 overflow-y-auto px-5 pb-10 pt-8">
+          <nav className="site-container flex flex-1 flex-col gap-1 overflow-y-auto pb-10 pt-8">
             {links.map((link, index) => (
               <a
                 key={link.href}

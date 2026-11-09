@@ -56,14 +56,14 @@ export function Contact() {
   return (
     <section
       id="contacto"
-      className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-8"
+      className="site-container py-16 sm:py-8"
     >
       <Separator className="mb-10 sm:mb-12" />
       <p className="section-kicker">{contact.kicker}</p>
-      <h2 className="section-title max-w-3xl md:max-w-none md:whitespace-nowrap md:text-[clamp(2rem,3.2vw,2.85rem)]">
+      <h2 className="section-title max-w-3xl lg:max-w-none lg:text-[clamp(2rem,2.8vw,2.85rem)]">
         {contact.title}
       </h2>
-      <p className="mt-4 max-w-xl text-ink-soft md:max-w-none md:whitespace-nowrap">
+      <p className="mt-4 max-w-xl text-ink-soft lg:max-w-none">
         {contact.intro}
       </p>
       <div className="mt-6 grid gap-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.7fr)] md:items-center md:gap-12 lg:gap-16">

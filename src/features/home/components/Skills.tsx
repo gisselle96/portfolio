@@ -18,7 +18,7 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-8"
+      className="site-container pt-16 sm:py-8"
     >
       <Separator className="mb-10 sm:mb-12" />
       <p className="section-kicker">{skills.kicker}</p>

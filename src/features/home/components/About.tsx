@@ -13,9 +13,9 @@ export function About() {
   return (
     <section
       id="sobre-mi"
-      className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-8"
+      className="site-container py-8"
     >
-      <Separator className="mb-10 sm:mb-12" />
+      <Separator className="mb-8 sm:mb-12" />
       <p className="section-kicker">{about.kicker}</p>
       <h2 className="section-title max-w-3xl lg:max-w-none">{about.title}</h2>
 
@@ -53,10 +53,12 @@ export function About() {
         </p>
 
         <div className="mt-8 space-y-6">
-          {about.roles.map((role) => (
+          {about.roles.map((role, index) => (
             <article
               key={`${role.title}-${role.company}`}
-              className="grid gap-3 border-t border-line pt-6 sm:grid-cols-[minmax(0,0.95fr)_minmax(0,1.2fr)] sm:gap-8"
+              className={`grid gap-3 sm:grid-cols-[minmax(0,0.95fr)_minmax(0,1.2fr)] sm:gap-8 ${
+                index === 0 ? "" : "border-t border-line pt-6"
+              }`}
             >
               <div>
                 <h4 className="font-[family-name:var(--font-display)] text-lg font-bold tracking-tight">

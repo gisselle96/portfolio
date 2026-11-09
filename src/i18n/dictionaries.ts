@@ -32,7 +32,7 @@ const es = {
   },
   about: {
     kicker: "02 · Sobre mí",
-    title: "Frontend enfocado en desarrollo de producto.",
+    title: "Frontend enfocado en el producto digital.",
     paragraphs: [
       "Soy Software Engineer enfocada en frontend, con más de 3 años construyendo con React, Next.js y TypeScript en fintech. Trabajo en productos complejos: listados, formularios, estados de carga, design systems e integración con microservicios.",
       "En itti formo parte del equipo de desarrollo que migró 3 portales web a Next.js con reescritura de la lógica. Desarrollo features con TanStack Query, componentes reutilizables sobre design system, tests con Vitest y code review con foco en tipado y refactors.",
@@ -80,7 +80,7 @@ const es = {
   },
   projects: {
     kicker: "03 · Proyectos",
-    title: "Craft de producto, sin exponer código de cliente.",
+    title: "Craft de producto.",
     intro:
       "Admin Portal, Business Portal y el design system en muv-sdk son de uso interno. Business Portal tiene una superficie corporativa visible; el resto no tiene demo ni repo abierto.",
     items: [
@@ -112,7 +112,7 @@ const es = {
   },
   skills: {
     kicker: "04 · Skills",
-    title: "Stack para entregar producto, no solo demos.",
+    title: "Stack para portales de producto.",
     intro:
       "React y Next.js en el centro, con TypeScript, Vitest, CI/CD y monitoreo. También sumo contexto con datos, UX/UI y otros lenguajes del stack.",
     groups: [
@@ -151,9 +151,9 @@ const es = {
   },
   contact: {
     kicker: "05 · Contacto",
-    title: "¿Buscás frontend con impacto real?",
+    title: "¿Necesitas ayuda? Contáctame",
     intro:
-      "Estoy en LATAM · Paraguay · Remoto. Completá el formulario y te respondo pronto.",
+      "Estoy en LATAM · Paraguay. Completá el formulario y te respondo pronto.",
     name: "Nombre",
     namePlaceholder: "Tu nombre",
     email: "Email",
