@@ -1,6 +1,6 @@
-import { profile } from "@/data/content";
+import { profile } from "@/features/home/constants/content";
 
-export function Footer() {
+export function SiteFooter() {
   return (
     <footer className="border-t border-line">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-5 py-8 text-sm text-ink-soft sm:flex-row sm:items-center sm:justify-between sm:px-8">

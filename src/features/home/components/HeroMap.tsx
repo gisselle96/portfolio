@@ -5,7 +5,7 @@ export function HeroMap() {
       className="pointer-events-none absolute inset-0 overflow-hidden"
     >
       <svg
-        className="absolute inset-y-0 right-[-8%] h-full w-[92%] max-w-none opacity-80 sm:right-[-2%] sm:w-[70%]"
+        className="absolute inset-y-[12%] right-[-18%] h-[88%] w-[120%] max-w-none opacity-35 sm:inset-y-0 sm:right-[-2%] sm:h-full sm:w-[70%] sm:opacity-80"
         viewBox="0 0 820 720"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

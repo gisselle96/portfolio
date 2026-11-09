@@ -1,15 +1,16 @@
-import { CaseStudy } from "@/components/CaseStudy";
-import { Contact } from "@/components/Contact";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
-import { Hero } from "@/components/Hero";
-import { Projects } from "@/components/Projects";
-import { Stack } from "@/components/Stack";
+import {
+  CaseStudy,
+  Contact,
+  Hero,
+  Projects,
+  Stack,
+} from "@/features/home";
+import { SiteFooter, SiteHeader } from "@/layouts";
 
 export default function Home() {
   return (
     <>
-      <Header />
+      <SiteHeader />
       <main className="flex-1">
         <Hero />
         <Projects />
@@ -17,7 +18,7 @@ export default function Home() {
         <Stack />
         <Contact />
       </main>
-      <Footer />
+      <SiteFooter />
     </>
   );
 }

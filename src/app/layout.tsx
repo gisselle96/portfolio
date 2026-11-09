@@ -1,38 +1,43 @@
-import type { Metadata } from "next";
-import { IBM_Plex_Mono, Manrope, Syne } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Roboto, Roboto_Mono } from "next/font/google";
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
 import "./globals.css";
 
-const display = Syne({
-  variable: "--font-display",
+const roboto = Roboto({
+  variable: "--font-roboto",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["300", "400", "500", "700"],
 });
 
-const body = Manrope({
-  variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const mono = IBM_Plex_Mono({
+const robotoMono = Roboto_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: "Gisselle Barreto · Software Engineer",
-  description:
-    "Portafolio personal de Gisselle Barreto. Backend, sistemas distribuidos y productos de movilidad — sin assets confidenciales.",
+  title: siteConfig.title,
+  description: siteConfig.description,
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#e8eef2",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es"
-      className={`${display.variable} ${body.variable} ${mono.variable} h-full antialiased`}
+      className={cn(
+        "h-full antialiased font-sans",
+        roboto.variable,
+        robotoMono.variable,
+      )}
     >
-      <body className="site-shell min-h-full flex flex-col font-sans">
+      <body className="site-shell flex min-h-full flex-col font-sans">
         {children}
       </body>
     </html>
