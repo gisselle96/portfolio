@@ -10,7 +10,7 @@ Incluye tema claro/oscuro (oscuro por defecto), español/inglés, secciones Welc
 - Tailwind CSS + shadcn/ui
 - Vitest + Testing Library
 - Yarn 4
-- reCAPTCHA v3 + FormSubmit (contacto)
+- reCAPTCHA v3 + Web3Forms / FormSubmit (contacto)
 - Sonner (toasts)
 
 ## Estructura
@@ -64,8 +64,9 @@ Para el deploy: si usás Vercel, el CD lo hace Vercel al pushear. Configurá en 
 
 - `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`
 - `RECAPTCHA_SECRET_KEY`
+- `WEB3FORMS_ACCESS_KEY` (recomendado; gratis en [web3forms.com](https://web3forms.com))
 
-Las keys deben ser **reCAPTCHA v3** y el dominio de Vercel (más `localhost` / `127.0.0.1` si las usás local) tiene que estar en la [consola de reCAPTCHA](https://www.google.com/recaptcha/admin).
+Las keys de reCAPTCHA deben ser **v3** y el dominio de Vercel (más `localhost` / `127.0.0.1` si las usás local) tiene que estar en la [consola de reCAPTCHA](https://www.google.com/recaptcha/admin).
 
 ## Contenido editable
 
@@ -79,7 +80,7 @@ Los proyectos listados (Admin Portal, Business Portal, Design System Web) son de
 
 ## Contacto
 
-El formulario POST a `/api/contact`: verifica reCAPTCHA v3, aplica honeypot y reenvía a FormSubmit con `profile.email`. La primera vez hay que confirmar el correo en FormSubmit (Activate Form). Feedback al usuario con toasts (Sonner).
+El formulario POST a `/api/contact`: verifica reCAPTCHA v3, aplica honeypot y envía el mail con **Web3Forms** si hay `WEB3FORMS_ACCESS_KEY`; si no, cae a FormSubmit (`profile.email`). Feedback al usuario con toasts (Sonner).
 
 ## Preferencias
 
