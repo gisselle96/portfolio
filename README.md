@@ -64,7 +64,7 @@ Para el deploy: si usás Vercel, el CD lo hace Vercel al pushear. Configurá en 
 
 - `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`
 - `RECAPTCHA_SECRET_KEY`
-- `WEB3FORMS_ACCESS_KEY` (recomendado; gratis en [web3forms.com](https://web3forms.com))
+- `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` (gratis en [web3forms.com](https://web3forms.com); la access key es pública y se usa desde el navegador)
 
 Las keys de reCAPTCHA deben ser **v3** y el dominio de Vercel (más `localhost` / `127.0.0.1` si las usás local) tiene que estar en la [consola de reCAPTCHA](https://www.google.com/recaptcha/admin).
 
@@ -80,7 +80,7 @@ Los proyectos listados (Admin Portal, Business Portal, Design System Web) son de
 
 ## Contacto
 
-El formulario POST a `/api/contact`: verifica reCAPTCHA v3, aplica honeypot y envía el mail con **Web3Forms** si hay `WEB3FORMS_ACCESS_KEY`; si no, cae a FormSubmit (`profile.email`). Feedback al usuario con toasts (Sonner).
+El formulario verifica reCAPTCHA v3 + honeypot en `/api/contact` y envía el mail desde el navegador a **Web3Forms** (`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`). El plan free de Web3Forms no permite envíos desde el servidor de Vercel. Feedback con toasts (Sonner).
 
 ## Preferencias
 

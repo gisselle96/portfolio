@@ -8,6 +8,10 @@ import { Contact } from "./Contact";
 
 const { contact } = dictionaries.es;
 
+vi.mock("@/lib/web3forms", () => ({
+  getWeb3FormsAccessKey: () => "test-web3forms-key",
+}));
+
 async function fillAndSubmit() {
   const user = userEvent.setup();
 
@@ -49,10 +53,16 @@ describe("Contact", () => {
   it("shows success toast after a successful submit", async () => {
     const successSpy = vi.spyOn(toast, "success");
     const errorSpy = vi.spyOn(toast, "error");
-    const fetchMock = vi.fn().mockResolvedValue({
-      ok: true,
-      json: async () => ({}),
-    });
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ ok: true }),
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ success: true }),
+      });
     vi.stubGlobal("fetch", fetchMock);
 
     renderWithPreferences(<Contact />);
@@ -62,7 +72,8 @@ describe("Contact", () => {
       expect(successSpy).toHaveBeenCalledWith(contact.success);
     });
     expect(errorSpy).not.toHaveBeenCalled();
-    expect(fetchMock).toHaveBeenCalledWith(
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      1,
       "/api/contact",
       expect.objectContaining({
         method: "POST",
@@ -74,6 +85,11 @@ describe("Contact", () => {
           captchaToken: "test-captcha-token",
         }),
       }),
+    );
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      2,
+      "https://api.web3forms.com/submit",
+      expect.objectContaining({ method: "POST" }),
     );
   });
 

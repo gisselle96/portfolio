@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { getRecaptchaSiteKey, RECAPTCHA_ACTION } from "@/lib/recaptcha";
+import { getWeb3FormsAccessKey } from "@/lib/web3forms";
 import { usePreferences } from "@/providers/PreferencesProvider";
 import { ProfilePhoto } from "./ProfilePhoto";
 
@@ -71,23 +72,69 @@ export function Contact() {
       return;
     }
 
+    const name = String(formData.get("name") ?? "");
+    const email = String(formData.get("email") ?? "");
+    const message = String(formData.get("message") ?? "");
+    const company = String(formData.get("company") ?? "");
+    const accessKey = getWeb3FormsAccessKey();
+
+    if (!accessKey) {
+      toast.error(
+        "Falta NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY. Configurala en Vercel y redeploy.",
+      );
+      setStatus("idle");
+      return;
+    }
+
     try {
-      const response = await fetch("/api/contact", {
+      // 1) Server: honeypot + reCAPTCHA
+      const verifyResponse = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: String(formData.get("name") ?? ""),
-          email: String(formData.get("email") ?? ""),
-          message: String(formData.get("message") ?? ""),
-          company: String(formData.get("company") ?? ""),
+          name,
+          email,
+          message,
+          company,
           captchaToken,
         }),
       });
 
-      const payload = (await response.json()) as { error?: string };
+      const verifyPayload = (await verifyResponse.json()) as { error?: string };
 
-      if (!response.ok) {
-        toast.error(payload.error ?? "No se pudo enviar el mensaje.");
+      if (!verifyResponse.ok) {
+        toast.error(verifyPayload.error ?? "No se pudo enviar el mensaje.");
+        setStatus("idle");
+        return;
+      }
+
+      // 2) Browser: Web3Forms (free plan blocks server-side calls)
+      const mailResponse = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name,
+          email,
+          message,
+          subject: `Portfolio · mensaje de ${name}`,
+          from_name: "Portfolio Gisselle",
+        }),
+      });
+
+      const mailPayload = (await mailResponse.json()) as {
+        success?: boolean;
+        message?: string;
+      };
+
+      if (!mailResponse.ok || mailPayload.success === false) {
+        toast.error(
+          mailPayload.message ||
+            "No se pudo enviar ahora. Probá de nuevo o escribime directo.",
+        );
         setStatus("idle");
         return;
       }
