@@ -12,7 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { getRecaptchaSiteKey, RECAPTCHA_ACTION } from "@/lib/recaptcha";
 import { getWeb3FormsAccessKey } from "@/lib/web3forms";
 import { usePreferences } from "@/providers/PreferencesProvider";
-import { ProfilePhoto } from "./ProfilePhoto";
+import { ContactLinks } from "./ContactLinks";
 
 type FormStatus = "idle" | "loading";
 
@@ -246,7 +246,7 @@ export function Contact() {
         </div>
 
         <div className="flex w-full items-center justify-center border-t border-line pt-10 md:border-t-0 md:pt-0">
-          <ProfilePhoto />
+          <ContactLinks />
         </div>
       </div>
     </section>

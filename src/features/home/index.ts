@@ -1,8 +1,8 @@
 export {
   About,
   Contact,
+  ContactLinks,
   Hero,
-  ProfilePhoto,
   Projects,
   Skills,
 } from "./components";

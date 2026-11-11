@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { ArrowRight, UserRound } from "lucide-react";
 import { profile } from "@/features/home/constants/content";
 import { Button } from "@/components/ui/button";
 import { usePreferences } from "@/providers/PreferencesProvider";
+import { HeroDevices } from "./HeroDevices";
 
 function HeroActions({ className = "" }: { className?: string }) {
   const { dict } = usePreferences();
@@ -64,17 +64,7 @@ export function Hero() {
           <HeroActions className="reveal reveal-delay-3 mt-8 hidden w-full flex-col gap-3 sm:mt-9 sm:w-auto sm:flex-row sm:flex-wrap lg:flex" />
         </div>
 
-        <div className="reveal reveal-delay-2 relative mx-auto flex w-full max-w-md items-center justify-center sm:max-w-lg lg:mx-0 lg:max-w-none">
-          <Image
-            src={profile.heroVisualPath}
-            alt=""
-            width={1536}
-            height={1024}
-            priority
-            sizes="(max-width: 1024px) 90vw, 40vw"
-            className="h-auto w-full object-contain"
-          />
-        </div>
+        <HeroDevices />
 
         <HeroActions className="reveal reveal-delay-3 flex w-full flex-col gap-3 lg:hidden" />
       </div>

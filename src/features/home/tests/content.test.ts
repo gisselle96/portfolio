@@ -18,10 +18,10 @@ describe("home content", () => {
 
   it("keeps recent experience copy", () => {
     expect(dictionaries.es.about.experienceTitle.toLowerCase()).toContain(
-      "experiencia",
+      "trayectoria",
     );
     expect(dictionaries.en.about.experienceTitle.toLowerCase()).toContain(
-      "experience",
+      "timeline",
     );
   });
 

@@ -13,7 +13,7 @@ describe("Hero", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("Hola, soy")).toBeInTheDocument();
     expect(
-      screen.getAllByRole("link", { name: /ver proyectos/i })[0],
+      screen.getAllByRole("link", { name: /ver mi trabajo/i })[0],
     ).toHaveAttribute("href", "#proyectos");
     expect(screen.getAllByRole("link", { name: /sobre mí/i })[0]).toHaveAttribute(
       "href",

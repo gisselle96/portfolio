@@ -17,10 +17,7 @@ export function Projects() {
   const { projects } = dict;
 
   return (
-    <section
-      id="proyectos"
-      className="site-container pt-16 sm:py-8"
-    >
+    <section id="proyectos" className="site-container pt-16 sm:py-8">
       <Separator className="mb-10 sm:mb-12" />
       <p className="section-kicker">{projects.kicker}</p>
       <h2 className="section-title max-w-2xl lg:max-w-none">{projects.title}</h2>
@@ -50,10 +47,17 @@ export function Projects() {
                   </div>
                 </div>
               </div>
-              <p className="project-summary text-[0.98rem] leading-relaxed text-ink-soft">
-                {project.summary}
-              </p>
-              <ul className="flex flex-wrap gap-x-3 gap-y-1 text-sm text-primary sm:justify-end">
+              <div className="project-summary space-y-3 text-[0.98rem] leading-relaxed text-ink-soft">
+                <p>{project.summary}</p>
+                {"highlights" in project && project.highlights?.length ? (
+                  <ul className="list-disc space-y-1.5 pl-5 marker:text-brand">
+                    {project.highlights.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+              <ul className="flex flex-wrap gap-x-3 gap-y-1 text-sm text-primary sm:justify-end sm:self-start">
                 {project.stack.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
