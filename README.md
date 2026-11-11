@@ -50,6 +50,7 @@ Sin keys en `.env.local`, el contacto usa las [keys de prueba de Google](https:/
 | Comando | Qué hace |
 | --- | --- |
 | `yarn dev` | Servidor de desarrollo |
+| `yarn prototype` | Dev en `127.0.0.1:3000` (landing craft / variantes) |
 | `yarn build` / `yarn start` | Build y producción |
 | `yarn test:run` | Tests (Vitest) |
 | `yarn typecheck` | TypeScript |
@@ -74,9 +75,9 @@ Las keys de reCAPTCHA deben ser **v3** y el dominio de Vercel (más `localhost` 
 - **Perfil / assets / email:** `src/features/home/constants/content.ts` (nombre, role, email, paths, links).
 - **CV PDF:** `public/cv/gisselle-barreto.pdf` — reemplazá el archivo manteniendo el nombre.
 - **Foto:** `public/profile/gisselle-barreto.jpg`
-- **Hero:** `public/hero/portfolio-devices-mac-crop.png`
+- **Hero:** `public/hero/portfolio-devices-base.png` + overlays SVG de métricas
 
-Los proyectos listados (Admin Portal, Business Portal, Design System Web) son de uso interno; Business Portal puede enlazar a una superficie corporativa visible. No se expone código ni datos de cliente.
+Los proyectos listados son trabajo en productos reales (varios de uso interno). Donde hay superficie pública visible, se enlaza. No se expone código ni datos de cliente.
 
 ## Contacto
 

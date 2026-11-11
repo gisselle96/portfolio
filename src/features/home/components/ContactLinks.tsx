@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { Mail } from "lucide-react";
 import { profile } from "@/features/home/constants/content";
 
@@ -31,7 +30,8 @@ function LinkedInIcon({ className }: { className?: string }) {
   );
 }
 
-export function ProfilePhoto() {
+/** Contact identity + socials, without profile photo. */
+export function ContactLinks() {
   const [copied, setCopied] = useState(false);
 
   async function copyEmail() {
@@ -46,19 +46,9 @@ export function ProfilePhoto() {
 
   return (
     <aside
-      aria-label="Foto de perfil y redes"
+      aria-label="Contacto y redes"
       className="flex flex-col items-center justify-center gap-4 text-center"
     >
-      <div className="relative h-36 w-36 overflow-hidden rounded-full border border-line sm:h-44 sm:w-44">
-        <Image
-          src={profile.photoPath}
-          alt={`Foto de ${profile.name}`}
-          fill
-          sizes="176px"
-          className="object-cover object-top"
-          priority={false}
-        />
-      </div>
       <div>
         <p className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-ink">
           {profile.name}

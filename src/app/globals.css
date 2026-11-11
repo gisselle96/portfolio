@@ -121,6 +121,15 @@ body {
   overflow-x: hidden;
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 /* Hide v3 badge; attribution text is in the contact form (Google policy). */
@@ -249,6 +258,40 @@ body {
   animation-iteration-count: infinite;
   transform-box: fill-box;
   transform-origin: center;
+}
+
+@keyframes screen-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes screen-bar-rise {
+  from {
+    transform: scaleY(0.35);
+    opacity: 0.45;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.screen-float {
+  animation: screen-float 5.5s ease-in-out infinite;
+}
+
+.screen-float-delayed {
+  animation: screen-float 6.2s ease-in-out 0.6s infinite;
+}
+
+.screen-bar {
+  transform-origin: bottom;
+  animation: screen-bar-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .nav-link {
@@ -381,7 +424,10 @@ body {
   .reveal-delay-3,
   .route-path,
   .route-dot,
-  .hero-float-dot {
+  .hero-float-dot,
+  .screen-float,
+  .screen-float-delayed,
+  .screen-bar {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;

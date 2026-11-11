@@ -21,7 +21,7 @@ async function fillAndSubmit() {
     screen.getByRole("textbox", { name: /mensaje/i }),
     "Hola, me interesa tu perfil",
   );
-  await user.click(screen.getByRole("button", { name: /enviar mensaje/i }));
+  await user.click(screen.getByRole("button", { name: /escribime/i }));
 
   return user;
 }
@@ -46,7 +46,7 @@ describe("Contact", () => {
     expect(screen.getByRole("textbox", { name: /^email$/i })).toBeInTheDocument();
     expect(screen.getByRole("textbox", { name: /mensaje/i })).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: /enviar mensaje/i }),
+      screen.getByRole("button", { name: /escribime/i }),
     ).toBeInTheDocument();
   });
 

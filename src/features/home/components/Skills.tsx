@@ -5,11 +5,20 @@ import {
   Database,
   PanelsTopLeft,
   ShieldCheck,
+  Sparkles,
+  Users,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { usePreferences } from "@/providers/PreferencesProvider";
 
-const groupIcons = [PanelsTopLeft, Database, Code2, ShieldCheck] as const;
+const groupIcons = [
+  PanelsTopLeft,
+  ShieldCheck,
+  Sparkles,
+  Users,
+  Database,
+  Code2,
+] as const;
 
 export function Skills() {
   const { dict } = usePreferences();
