@@ -7,6 +7,7 @@ describe("home content", () => {
     expect(profile.name).toBe("Gisselle Barreto");
     expect(profile.role).toContain("Software Engineer");
     expect(profile.cvPath).toBe("/cv/gisselle-barreto.pdf");
+    expect(profile.atsCvPath).toBe("/api/cv");
   });
 
   it("has spanish and english dictionaries", () => {

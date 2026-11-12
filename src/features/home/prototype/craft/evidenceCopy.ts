@@ -51,7 +51,7 @@ const es = {
         did: [
           "Tomo la feature desde el diseño en Figma hasta producción: UI, validaciones, estados y contrato con la API.",
           "Pienso los casos borde antes de abrir el PR; es lo que me dejó mi etapa en QA.",
-          "Uso desarrollo asistido por IA con Cursor, guiado por specs (Spec-itti), y reviso cada diff antes de mergear.",
+          "Uso desarrollo asistido por IA guiado por specs, y reviso cada diff antes de mergear.",
         ],
         short: "La feature completa en el mismo entregable: UI, datos, estados y tests.",
         stack: ["React", "TypeScript", "Figma", "Cursor", "Scrum"],
@@ -104,30 +104,34 @@ const es = {
   },
   ai: {
     kicker: "03 · IA",
-    title: "Spec primero. IA después. Merge mío.",
+    title: "IA aplicada a cómo construyo soluciones.",
     intro:
-      "Uso Cursor todos los días en itti. No es un atajo: es un flujo. La spec define el contexto; la IA acelera el borrador; yo reviso el diff y firmo el merge.",
-    methodLabel: "Cómo lo uso",
+      "Ya no arranco una feature escribiendo código. Primero especifico, después planifico, delego el borrador a los agentes y reviso cada cambio. Lo que llega a producción sigue siendo mi responsabilidad. El método no cambia; las herramientas me adapto a las que use el equipo.",
+    methodLabel: "Cómo trabajo con IA",
     steps: [
       {
-        title: "Spec primero",
-        body: "Arranco con Spec-itti: la spec es el contexto del trabajo, no el chat. Ahí queda qué construir, qué estados importan y qué no entra en el alcance.",
+        title: "Contexto",
+        body: "Antes de pedir nada, junto el diseño de Figma, la historia de usuario y los casos borde. Mi etapa en QA me enseñó a buscar dónde se rompe antes de construir.",
       },
       {
-        title: "La IA propone",
-        body: "Con ese contexto, Cursor me acelera el primer borrador de UI, boilerplate, tests iniciales, refactors mecánicos y búsquedas en el codebase.",
+        title: "Spec",
+        body: "Escribo la spec: qué se construye, qué estados importan y qué queda fuera. Uso el formato o framework de specs que tenga el equipo. Sin spec aprobada no arranca ningún agente.",
       },
       {
-        title: "Yo decido",
-        body: "Defino la forma del componente, los estados, el contrato con backend y qué asserts importan. Lo frágil o ambiguo no se mergea por confianza en la IA.",
+        title: "Plan",
+        body: "La spec se divide en tareas chicas, y cada una dice cómo comprobar que está lista. Así el agente trabaja con contexto, no con un prompt suelto.",
       },
       {
-        title: "Merge con criterio",
-        body: "Leo el diff completo. Si es un bug, lo reproduzco y lo valido en el producto. Si no entiendo el cambio, no sale.",
+        title: "Construcción",
+        body: "Con el asistente o agente que use el equipo, la IA genera UI, hooks y tests a partir del plan. Elijo el modelo según el problema; no dejo que el modelo elija el diseño.",
+      },
+      {
+        title: "Revisión",
+        body: "Leo el diff completo, corro los tests y lo pruebo en el producto.",
       },
     ],
-    toolsLabel: "Con qué",
-    tools: ["Cursor", "Claude", "Gemini", "Spec-itti (spec-driven)"],
+    toolsLabel: "Con qué trabajo hoy",
+    tools: ["Cursor", "Spec Kit", "Claude", "Gemini", "Desarrollo guiado por specs"],
     closing: "La velocidad sin criterio no cuenta.",
   },
   stack: {
@@ -211,7 +215,7 @@ const en: EvidenceCopy = {
         did: [
           "I take a feature from the Figma design to production: UI, validation, states, and the API contract.",
           "I think through edge cases before opening the PR; that’s what my QA years left me.",
-          "I use AI-assisted development with Cursor, driven by specs (Spec-itti), and review every diff before merging.",
+          "I use spec-driven, AI-assisted development and review every diff before merging.",
         ],
         short: "The whole feature in one delivery: UI, data, states, and tests.",
         stack: ["React", "TypeScript", "Figma", "Cursor", "Scrum"],
@@ -264,30 +268,34 @@ const en: EvidenceCopy = {
   },
   ai: {
     kicker: "03 · AI",
-    title: "Spec first. AI second. My merge.",
+    title: "AI applied to how I build solutions.",
     intro:
-      "I use Cursor every day at itti. It’s not a shortcut — it’s a workflow. The spec sets the context; AI speeds up the draft; I review the diff and own the merge.",
-    methodLabel: "How I use it",
+      "I no longer start a feature by writing code. I specify first, then plan, hand the draft to agents, and review every change. What reaches production is still my responsibility. The method stays the same; I adapt to whatever tools the team uses.",
+    methodLabel: "How I work with AI",
     steps: [
       {
-        title: "Spec first",
-        body: "I start with Spec-itti: the spec is the work context, not the chat. It locks what to build, which states matter, and what’s out of scope.",
+        title: "Context",
+        body: "Before asking for anything, I gather the Figma design, the user story, and the edge cases. My QA years taught me to look for where it breaks before building.",
       },
       {
-        title: "AI proposes",
-        body: "With that context, Cursor speeds up the first UI draft, boilerplate, initial tests, mechanical refactors, and codebase search.",
+        title: "Spec",
+        body: "I write the spec: what gets built, which states matter, and what’s out of scope. I use whatever spec format or framework the team has. No approved spec, no agent.",
       },
       {
-        title: "I decide",
-        body: "I own component shape, states, the backend contract, and which asserts matter. Anything fragile or unclear doesn’t merge on AI trust alone.",
+        title: "Plan",
+        body: "The spec is split into small tasks, each with a way to check it’s done. That way the agent works with context, not a loose prompt.",
       },
       {
-        title: "Merge with judgment",
-        body: "I read the full diff. If it’s a bug, I reproduce it and validate it in the product. If I don’t understand the change, it doesn’t ship.",
+        title: "Build",
+        body: "With whatever assistant or agent the team uses, AI generates UI, hooks, and tests from the plan. I pick the model for the problem; the model doesn’t pick the design.",
+      },
+      {
+        title: "Review",
+        body: "I read the full diff, run the tests, and try it in the product.",
       },
     ],
-    toolsLabel: "With",
-    tools: ["Cursor", "Claude", "Gemini", "Spec-itti (spec-driven)"],
+    toolsLabel: "What I use today",
+    tools: ["Cursor", "Spec Kit", "Claude", "Gemini", "Spec-driven development"],
     closing: "Speed without judgment doesn’t count.",
   },
   stack: {

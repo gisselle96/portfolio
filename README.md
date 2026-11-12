@@ -73,7 +73,8 @@ Las keys de reCAPTCHA deben ser **v3** y el dominio de Vercel (más `localhost` 
 
 - **Textos UI (ES/EN):** `src/i18n/dictionaries.ts` — fuente principal de copy, proyectos, skills y contacto.
 - **Perfil / assets / email:** `src/features/home/constants/content.ts` (nombre, role, email, paths, links).
-- **CV PDF:** `public/cv/gisselle-barreto.pdf` — reemplazá el archivo manteniendo el nombre.
+- **CV diseñado:** `public/cv/gisselle-barreto.pdf` — reemplazá el archivo manteniendo el nombre.
+- **CV para ATS:** `src/features/cv/constants/content.ts` — lo genera `/api/cv?lang=es|en` (una columna, texto plano).
 - **Foto:** `public/profile/gisselle-barreto.jpg`
 - **Hero:** `public/hero/portfolio-devices-base.png` + overlays SVG de métricas
 

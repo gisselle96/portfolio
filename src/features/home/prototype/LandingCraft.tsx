@@ -85,7 +85,7 @@ export function LandingCraft() {
           <h1 className="mt-4 max-w-[20ch] font-[family-name:var(--font-display)] text-[clamp(2.4rem,6.5vw,4.4rem)] leading-[0.98] font-bold tracking-[-0.045em] text-ink">
             {copy.hero.headline}
           </h1>
-          <p className="mt-6 max-w-3xl text-base leading-relaxed text-ink-soft sm:text-lg">
+          <p className="mt-6 text-base leading-relaxed text-ink-soft sm:text-lg">
             {copy.hero.lead}
           </p>
           <ul className="mt-5 flex flex-wrap gap-2 font-[family-name:var(--font-mono)] text-xs text-ink-soft">
@@ -134,8 +134,8 @@ export function LandingCraft() {
         <section id="craft-work" className="site-container py-8 sm:py-12">
           <Separator className="mb-10 sm:mb-12" />
           <p className="section-kicker">{copy.work.kicker}</p>
-          <h2 className="section-title max-w-3xl">{copy.work.title}</h2>
-          <p className="mt-4 max-w-2xl text-ink-soft">{copy.work.intro}</p>
+          <h2 className="section-title">{copy.work.title}</h2>
+          <p className="mt-4 text-ink-soft">{copy.work.intro}</p>
 
           <div className="mt-14 space-y-20">
             {copy.work.cases.map((item, index) => {
@@ -202,8 +202,8 @@ export function LandingCraft() {
         <section id="craft-journey" className="site-container py-8 sm:py-12">
           <Separator className="mb-10 sm:mb-12" />
           <p className="section-kicker">{copy.journey.kicker}</p>
-          <h2 className="section-title max-w-3xl">{copy.journey.title}</h2>
-          <p className="mt-4 max-w-2xl text-ink-soft">{copy.journey.intro}</p>
+          <h2 className="section-title">{copy.journey.title}</h2>
+          <p className="mt-4 text-ink-soft">{copy.journey.intro}</p>
 
           <ol className="mt-10 border-l border-line">
             {copy.journey.steps.map((step, index) => (
@@ -220,7 +220,7 @@ export function LandingCraft() {
                   {step.role}
                   <span className="font-medium text-ink-soft"> · {step.org}</span>
                 </h3>
-                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-soft sm:text-[0.95rem]">
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft sm:text-[0.95rem]">
                   {step.body}
                 </p>
               </li>
@@ -231,32 +231,43 @@ export function LandingCraft() {
         <section id="craft-ai" className="site-container py-8 sm:py-12">
           <Separator className="mb-10 sm:mb-12" />
           <p className="section-kicker">{copy.ai.kicker}</p>
-          <h2 className="section-title max-w-3xl">{copy.ai.title}</h2>
-          <p className="mt-4 max-w-2xl text-ink-soft">{copy.ai.intro}</p>
+          <h2 className="section-title">{copy.ai.title}</h2>
+          <p className="mt-4 text-ink-soft">{copy.ai.intro}</p>
 
           <p className="mt-10 font-[family-name:var(--font-mono)] text-xs tracking-[0.14em] text-brand uppercase">
             {copy.ai.methodLabel}
           </p>
-          <ol className="mt-6 border-l border-line">
-            {copy.ai.steps.map((step, index) => (
-              <li key={step.title} className="relative pb-8 pl-8 last:pb-0">
-                <span
-                  className={`absolute top-1.5 -left-[0.4rem] h-3 w-3 rounded-full border-2 ${
-                    index === 0 ? "border-brand bg-brand" : "border-line bg-bg"
-                  }`}
-                />
-                <p className="font-[family-name:var(--font-mono)] text-[0.65rem] tracking-[0.12em] text-ink-soft">
-                  {String(index + 1).padStart(2, "0")}
-                </p>
-                <h3 className="mt-1 font-[family-name:var(--font-display)] text-xl font-bold tracking-tight">
-                  {step.title}
-                </h3>
-                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-soft sm:text-[0.95rem]">
-                  {step.body}
-                </p>
-              </li>
-            ))}
-          </ol>
+          <div className="-mx-4 mt-6 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
+            <ol className="grid min-w-[52rem] grid-cols-5 gap-6">
+              {copy.ai.steps.map((step, index) => {
+                const isLast = index === copy.ai.steps.length - 1;
+
+                return (
+                  <li key={step.title}>
+                    <p className="font-[family-name:var(--font-mono)] text-[0.65rem] tracking-[0.12em] text-ink-soft">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <h3 className="mt-1 font-[family-name:var(--font-display)] text-xl font-bold tracking-tight">
+                      {step.title}
+                    </h3>
+                    <div className="relative my-4 h-3">
+                      <span
+                        className={`absolute top-1/2 left-0 h-px bg-line ${
+                          isLast ? "right-0" : "-right-6"
+                        }`}
+                      />
+                      <span
+                        className={`absolute top-0 left-0 h-3 w-3 rounded-full border-2 ${
+                          index === 0 ? "border-brand bg-brand" : "border-line bg-bg"
+                        }`}
+                      />
+                    </div>
+                    <p className="text-sm leading-relaxed text-ink-soft">{step.body}</p>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
 
           <div className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-line pt-6">
             <p className="font-[family-name:var(--font-mono)] text-xs tracking-[0.14em] text-brand uppercase">
@@ -268,7 +279,7 @@ export function LandingCraft() {
               </span>
             ))}
           </div>
-          <p className="mt-6 max-w-2xl text-lg font-medium tracking-tight text-ink">
+          <p className="mt-6 text-lg font-medium tracking-tight text-ink">
             {copy.ai.closing}
           </p>
         </section>
@@ -276,8 +287,8 @@ export function LandingCraft() {
         <section id="craft-stack" className="site-container py-8 sm:py-12">
           <Separator className="mb-10 sm:mb-12" />
           <p className="section-kicker">{copy.stack.kicker}</p>
-          <h2 className="section-title max-w-3xl">{copy.stack.title}</h2>
-          <p className="mt-4 max-w-2xl text-ink-soft">{copy.stack.intro}</p>
+          <h2 className="section-title">{copy.stack.title}</h2>
+          <p className="mt-4 text-ink-soft">{copy.stack.intro}</p>
 
           <ul className="mt-6 flex flex-wrap gap-2">
             {(Object.keys(levelLabel) as EvidenceLevel[]).map((level) => (
@@ -326,7 +337,7 @@ export function LandingCraft() {
         <section className="site-container py-8 sm:py-12">
           <Separator className="mb-10 sm:mb-12" />
           <p className="section-kicker">{copy.practice.kicker}</p>
-          <h2 className="section-title max-w-3xl">{copy.practice.title}</h2>
+          <h2 className="section-title">{copy.practice.title}</h2>
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
             {copy.practice.points.map((point) => (
               <article key={point.title} className="border-t border-line pt-5">
@@ -339,7 +350,7 @@ export function LandingCraft() {
               </article>
             ))}
           </div>
-          <p className="mt-12 max-w-2xl text-base leading-relaxed text-ink sm:text-lg">
+          <p className="mt-12 text-base leading-relaxed text-ink sm:text-lg">
             {copy.contactBio}
           </p>
         </section>

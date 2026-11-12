@@ -355,7 +355,7 @@ const es = {
       steps: [
         {
           title: "Spec primero",
-          body: "Arranco con Spec-itti: la spec es el contexto del trabajo, no el chat. Ahí queda qué construir, qué estados importan y qué no entra en el alcance.",
+          body: "Arranco con una spec, en el formato que use el equipo: la spec es el contexto del trabajo, no el chat. Ahí queda qué construir, qué estados importan y qué no entra en el alcance.",
         },
         {
           title: "La IA propone",
@@ -371,7 +371,7 @@ const es = {
         },
       ],
       toolsLabel: "Con qué",
-      tools: ["Cursor", "Claude", "Gemini", "Spec-itti (spec-driven)"],
+      tools: ["Cursor", "Spec Kit", "Claude", "Gemini", "Desarrollo guiado por specs"],
       closing: "La velocidad sin criterio no cuenta.",
     },
     contactBio:
@@ -730,7 +730,7 @@ const en = {
       steps: [
         {
           title: "Spec first",
-          body: "I start with Spec-itti: the spec is the work context, not the chat. It locks what to build, which states matter, and what’s out of scope.",
+          body: "I start with a spec, in whatever format the team uses: the spec is the work context, not the chat. It locks what to build, which states matter, and what’s out of scope.",
         },
         {
           title: "AI proposes",
@@ -746,7 +746,7 @@ const en = {
         },
       ],
       toolsLabel: "With",
-      tools: ["Cursor", "Claude", "Gemini", "Spec-itti (spec-driven)"],
+      tools: ["Cursor", "Spec Kit", "Claude", "Gemini", "Spec-driven development"],
       closing: "Speed without judgment doesn’t count.",
     },
     contactBio:
