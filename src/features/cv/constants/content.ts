@@ -12,12 +12,13 @@ const contact = {
   links: {
     linkedin: "https://www.linkedin.com/in/gisselle-barreto-8b916a216/",
     github: "https://github.com/gisselle96",
+    portfolio: "https://portfolio-gi-ba.vercel.app",
   },
 } as const;
 
 const es = {
   ...contact,
-  updatedAt: "2026-11-09",
+  updatedAt: "2026-11-11",
   role: "Software Engineer | Frontend Developer · React · Next.js · TypeScript",
   location: "Capiatá, Paraguay · Remoto (UTC-3)",
   headings: {
@@ -29,8 +30,13 @@ const es = {
     languages: "Idiomas",
     updated: "Actualizado",
   },
+  labels: {
+    linkedin: "LinkedIn",
+    github: "GitHub",
+    portfolio: "Portafolio",
+  },
   summary:
-    "Software Engineer y Frontend Developer con casi 5 años en el sector fintech, más de 3 de ellos en desarrollo frontend con React, Next.js y TypeScript. Migré 3 portales web a Next.js con reescritura completa de su lógica y resolví más de 50 bugs en producción. Mi experiencia previa en QA me da una visión integral de la calidad, la usabilidad y el ciclo de vida del producto.",
+    "Software Engineer (Frontend) con casi 5 años en fintech: más de 3 desarrollando con React, Next.js y TypeScript, y 1,5 en QA. Migré 3 portales web a Next.js reescribiendo su lógica, construyo features de punta a punta sobre microservicios (BFF y API Gateway) y resolví más de 50 bugs en producción con New Relic. Trabajo con desarrollo asistido por IA guiado por specs, tests con Vitest y code review con foco en tipado y calidad.",
   experience: [
     {
       title: "Software Engineer (Frontend)",
@@ -38,13 +44,14 @@ const es = {
       location: "Paraguay",
       period: "Jul 2023 – Actualidad",
       bullets: [
-        "Migré 3 portales web a React, Next.js y TypeScript, con reescritura completa de la lógica.",
-        "Desarrollé frontend integrado a una arquitectura de microservicios (BFF y API Gateway).",
-        "Implementé nuevas funcionalidades con TanStack Query y componentes reutilizables sobre el design system.",
+        "Migré 3 portales web a React, Next.js y TypeScript, reescribiendo la lógica de negocio y no solo la capa visual.",
+        "Integré el frontend con microservicios a través de BFF y API Gateway, usando TanStack Query para caché, invalidación y estados de red.",
+        "Desarrollo features de punta a punta, del diseño en Figma a producción: UI, validaciones, estados de carga, vacío y error, y contrato con la API.",
+        "Construí componentes reutilizables sobre el design system compartido entre productos.",
         "Escribí tests unitarios con Vitest para hooks y componentes, y acompañé al equipo en su adopción.",
-        "Resolví más de 50 bugs en producción con monitoreo en New Relic.",
-        "Realicé code review de PRs del equipo con foco en refactors, tipado y cobertura de tests.",
-        "Apliqué desarrollo asistido por IA con Cursor, guiado por specs (Spec-itti).",
+        "Rastreé y resolví más de 50 bugs en producción con monitoreo en New Relic.",
+        "Hago code review de PRs con foco en tipado, refactors y cobertura de tests.",
+        "Aplico desarrollo asistido por IA guiado por specs (Cursor, Spec Kit, Claude, Gemini) y reviso cada diff antes del merge.",
       ],
     },
     {
@@ -53,8 +60,9 @@ const es = {
       location: "Paraguay",
       period: "Ene 2022 – Jul 2023",
       bullets: [
-        "Planifiqué y ejecuté pruebas funcionales y de usabilidad de productos digitales.",
-        "Trabajé en squads junto a producto, diseño y desarrollo dentro de sprints Scrum.",
+        "Planifiqué y ejecuté pruebas funcionales y de usabilidad de productos digitales fintech.",
+        "Documenté hallazgos y validé correcciones junto al equipo de desarrollo.",
+        "Trabajé en squads con producto, diseño y desarrollo dentro de sprints Scrum.",
       ],
     },
     {
@@ -63,7 +71,8 @@ const es = {
       location: "Paraguay",
       period: "2019 – 2020",
       bullets: [
-        "Co-fundé un emprendimiento edtech ganador de premios (Tigo Campus Party, Kuña Mbaretech, entre otros), a cargo de operación y producto.",
+        "Co-fundé un emprendimiento edtech premiado (Tigo Campus Party, Kuña Mbaretech, entre otros), a cargo de operación y producto.",
+        "Prioricé y lancé producto con un equipo chico.",
       ],
     },
   ],
@@ -86,7 +95,7 @@ const es = {
     },
     {
       label: "IA aplicada",
-      items: ["Cursor", "Desarrollo asistido por IA", "Spec-driven development"],
+      items: ["Cursor", "Spec Kit", "Claude", "Gemini", "Desarrollo asistido por IA", "Spec-driven development"],
     },
     {
       label: "Metodologías y herramientas",
@@ -116,7 +125,7 @@ type CvData = typeof es;
 
 const en: CvData = {
   ...contact,
-  updatedAt: "2026-11-09",
+  updatedAt: "2026-11-11",
   role: "Software Engineer | Frontend Developer · React · Next.js · TypeScript",
   location: "Capiatá, Paraguay · Remote (UTC-3)",
   headings: {
@@ -128,8 +137,13 @@ const en: CvData = {
     languages: "Languages",
     updated: "Updated",
   },
+  labels: {
+    linkedin: "LinkedIn",
+    github: "GitHub",
+    portfolio: "Portfolio",
+  },
   summary:
-    "Software Engineer and Frontend Developer with almost 5 years in fintech, 3+ of them building frontend with React, Next.js, and TypeScript. Migrated 3 web portals to Next.js with a full rewrite of their logic and fixed 50+ production bugs. A previous QA role gives me an end-to-end view of quality, usability, and the product lifecycle.",
+    "Software Engineer (Frontend) with almost 5 years in fintech: 3+ building with React, Next.js, and TypeScript, and 1.5 in QA. Migrated 3 web portals to Next.js by rewriting their logic, build end-to-end features on microservices (BFF and API Gateway), and fixed 50+ production bugs with New Relic. I work with spec-driven, AI-assisted development, Vitest testing, and code review focused on typing and quality.",
   experience: [
     {
       title: "Software Engineer (Frontend)",
@@ -137,13 +151,14 @@ const en: CvData = {
       location: "Paraguay",
       period: "Jul 2023 – Present",
       bullets: [
-        "Migrated 3 web portals to React, Next.js, and TypeScript, fully rewriting their logic.",
-        "Built frontend integrated with a microservices architecture (BFF and API Gateway).",
-        "Shipped new features with TanStack Query and reusable components on the design system.",
+        "Migrated 3 web portals to React, Next.js, and TypeScript, rewriting the business logic, not just the visual layer.",
+        "Integrated the frontend with microservices through a BFF and API Gateway, using TanStack Query for caching, invalidation, and network states.",
+        "Build end-to-end features, from Figma design to production: UI, validation, loading, empty, and error states, and the API contract.",
+        "Built reusable components on the design system shared across products.",
         "Wrote unit tests with Vitest for hooks and components and helped the team adopt them.",
-        "Fixed 50+ production bugs using New Relic monitoring.",
-        "Reviewed team pull requests with a focus on refactoring, typing, and test coverage.",
-        "Applied AI-assisted development with Cursor, driven by specs (Spec-itti).",
+        "Traced and fixed 50+ production bugs using New Relic monitoring.",
+        "Review pull requests with a focus on typing, refactoring, and test coverage.",
+        "Apply spec-driven, AI-assisted development (Cursor, Spec Kit, Claude, Gemini) and review every diff before merging.",
       ],
     },
     {
@@ -152,7 +167,8 @@ const en: CvData = {
       location: "Paraguay",
       period: "Jan 2022 – Jul 2023",
       bullets: [
-        "Planned and executed functional and usability testing of digital products.",
+        "Planned and executed functional and usability testing of fintech digital products.",
+        "Documented findings and validated fixes with the development team.",
         "Worked in squads with product, design, and engineering in Scrum sprints.",
       ],
     },
@@ -163,6 +179,7 @@ const en: CvData = {
       period: "2019 – 2020",
       bullets: [
         "Co-founded an award-winning edtech startup (Tigo Campus Party, Kuña Mbaretech, and others), leading operations and product.",
+        "Prioritized and shipped product with a small team.",
       ],
     },
   ],
@@ -185,7 +202,7 @@ const en: CvData = {
     },
     {
       label: "Applied AI",
-      items: ["Cursor", "AI-assisted development", "Spec-driven development"],
+      items: ["Cursor", "Spec Kit", "Claude", "Gemini", "AI-assisted development", "Spec-driven development"],
     },
     {
       label: "Methodologies & Tools",
@@ -215,10 +232,6 @@ export const cvByLocale: Record<Locale, CvData> = { es, en };
 
 export const cv = es;
 
-export const cvFileName = "gisselle-barreto-cv.pdf";
-
 export function cvFileNameFor(locale: Locale) {
-  return locale === "en"
-    ? "gisselle-barreto-cv-en.pdf"
-    : "gisselle-barreto-cv-es.pdf";
+  return `gisselle-barreto-cv-ats-${locale}.pdf`;
 }

@@ -1,5 +1,6 @@
 import {
   Document,
+  Font,
   Page,
   StyleSheet,
   Text,
@@ -8,16 +9,18 @@ import {
 import { cvByLocale } from "@/features/cv/constants/content";
 import type { Locale } from "@/i18n/types";
 
+Font.registerHyphenationCallback((word) => [word]);
+
 /** Single column, standard headings, real text only: easy for ATS parsers. */
 const styles = StyleSheet.create({
   page: {
-    paddingTop: 34,
-    paddingBottom: 34,
-    paddingHorizontal: 42,
-    fontSize: 9.5,
+    paddingTop: 30,
+    paddingBottom: 30,
+    paddingHorizontal: 40,
+    fontSize: 9.3,
     fontFamily: "Helvetica",
     color: "#101820",
-    lineHeight: 1.3,
+    lineHeight: 1.25,
   },
   name: {
     fontSize: 20,
@@ -38,8 +41,8 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold",
     textTransform: "uppercase",
     letterSpacing: 0.8,
-    marginTop: 10,
-    marginBottom: 5,
+    marginTop: 8,
+    marginBottom: 4,
     paddingBottom: 2,
     borderBottomWidth: 0.75,
     borderBottomColor: "#101820",
@@ -102,7 +105,10 @@ export function CvDocument({ locale = "es" }: { locale?: Locale } = {}) {
           {`${cv.location} · ${cv.email} · ${cv.phone}`}
         </Text>
         <Text style={styles.contactLine}>
-          {`LinkedIn: ${cv.links.linkedin} · GitHub: ${cv.links.github}`}
+          {`${cv.labels.linkedin}: ${cv.links.linkedin}`}
+        </Text>
+        <Text style={styles.contactLine}>
+          {`${cv.labels.github}: ${cv.links.github} · ${cv.labels.portfolio}: ${cv.links.portfolio}`}
         </Text>
 
         <Text style={styles.sectionTitle}>{cv.headings.summary}</Text>

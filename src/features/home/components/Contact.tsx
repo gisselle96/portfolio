@@ -162,7 +162,7 @@ export function Contact() {
       <h2 className="section-title max-w-3xl lg:max-w-none lg:text-[clamp(2rem,2.8vw,2.85rem)]">
         {contact.title}
       </h2>
-      <p className="mt-4 max-w-xl text-ink-soft lg:max-w-none">
+      <p className="mt-4 text-ink-soft">
         {contact.intro}
       </p>
       <div className="mt-6 grid gap-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.7fr)] md:items-center md:gap-12 lg:gap-16">

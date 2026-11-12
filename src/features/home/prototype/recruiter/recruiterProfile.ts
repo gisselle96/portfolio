@@ -220,8 +220,8 @@ export const skillEvidence: readonly SkillEvidence[] = [
     group: ai,
     level: "production",
     where: {
-      es: "itti: specs como contexto con Spec-itti",
-      en: "itti: specs as context with Spec-itti",
+      es: "itti: desarrollo guiado por specs (spec como contexto)",
+      en: "itti: spec-driven development (spec as context)",
     },
   },
   {
