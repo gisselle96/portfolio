@@ -1,5 +1,5 @@
-import { HomePrototype } from "@/features/home/prototype/HomePrototype";
+import { LandingCraft } from "@/features/home/prototype/LandingCraft";
 
 export default function Home() {
-  return <HomePrototype />;
+  return <LandingCraft />;
 }

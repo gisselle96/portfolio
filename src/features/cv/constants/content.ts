@@ -18,7 +18,7 @@ const contact = {
 
 const es = {
   ...contact,
-  updatedAt: "2026-11-11",
+  updatedAt: "2026-11-17",
   role: "Software Engineer | Frontend Developer · React · Next.js · TypeScript",
   location: "Capiatá, Paraguay · Remoto (UTC-3)",
   headings: {
@@ -45,7 +45,7 @@ const es = {
       period: "Jul 2023 – Actualidad",
       bullets: [
         "Migré 3 portales web a React, Next.js y TypeScript, reescribiendo la lógica de negocio y no solo la capa visual.",
-        "Integré el frontend con microservicios a través de BFF y API Gateway, usando TanStack Query para caché, invalidación y estados de red.",
+        "Integré el frontend con microservicios a través de BFF y API Gateway, con TanStack Query para caché y estados de red, Zustand para el estado del cliente y Zod para validar formularios y datos.",
         "Desarrollo features de punta a punta, del diseño en Figma a producción: UI, validaciones, estados de carga, vacío y error, y contrato con la API.",
         "Construí componentes reutilizables sobre el design system compartido entre productos.",
         "Escribí tests unitarios con Vitest para hooks y componentes, y acompañé al equipo en su adopción.",
@@ -79,7 +79,7 @@ const es = {
   skills: [
     {
       label: "Frontend",
-      items: ["React (React.js)", "Next.js", "TypeScript", "JavaScript", "HTML", "CSS", "TanStack Query", "Design Systems"],
+      items: ["React (React.js)", "Next.js", "TypeScript", "JavaScript", "HTML", "CSS", "TanStack Query", "Zustand", "Zod", "Design Systems"],
     },
     {
       label: "Arquitectura",
@@ -125,7 +125,7 @@ type CvData = typeof es;
 
 const en: CvData = {
   ...contact,
-  updatedAt: "2026-11-11",
+  updatedAt: "2026-11-17",
   role: "Software Engineer | Frontend Developer · React · Next.js · TypeScript",
   location: "Capiatá, Paraguay · Remote (UTC-3)",
   headings: {
@@ -152,7 +152,7 @@ const en: CvData = {
       period: "Jul 2023 – Present",
       bullets: [
         "Migrated 3 web portals to React, Next.js, and TypeScript, rewriting the business logic, not just the visual layer.",
-        "Integrated the frontend with microservices through a BFF and API Gateway, using TanStack Query for caching, invalidation, and network states.",
+        "Integrated the frontend with microservices through a BFF and API Gateway, with TanStack Query for caching and network states, Zustand for client state, and Zod for form and data validation.",
         "Build end-to-end features, from Figma design to production: UI, validation, loading, empty, and error states, and the API contract.",
         "Built reusable components on the design system shared across products.",
         "Wrote unit tests with Vitest for hooks and components and helped the team adopt them.",
@@ -186,7 +186,7 @@ const en: CvData = {
   skills: [
     {
       label: "Frontend",
-      items: ["React (React.js)", "Next.js", "TypeScript", "JavaScript", "HTML", "CSS", "TanStack Query", "Design Systems"],
+      items: ["React (React.js)", "Next.js", "TypeScript", "JavaScript", "HTML", "CSS", "TanStack Query", "Zustand", "Zod", "Design Systems"],
     },
     {
       label: "Architecture",

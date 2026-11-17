@@ -50,7 +50,7 @@ Sin keys en `.env.local`, el contacto usa las [keys de prueba de Google](https:/
 | Comando | Qué hace |
 | --- | --- |
 | `yarn dev` | Servidor de desarrollo |
-| `yarn prototype` | Dev en `127.0.0.1:3000` (landing craft / variantes) |
+| `yarn prototype` | Dev en `127.0.0.1:3000` |
 | `yarn build` / `yarn start` | Build y producción |
 | `yarn test:run` | Tests (Vitest) |
 | `yarn typecheck` | TypeScript |

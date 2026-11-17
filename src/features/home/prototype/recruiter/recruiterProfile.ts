@@ -104,6 +104,26 @@ export const skillEvidence: readonly SkillEvidence[] = [
     },
   },
   {
+    name: "Zustand",
+    aliases: ["zustand", "state management", "estado global"],
+    group: web,
+    level: "production",
+    where: {
+      es: "itti: estado del cliente en Admin y Business Portal",
+      en: "itti: client state in the Admin and Business portals",
+    },
+  },
+  {
+    name: "Zod",
+    aliases: ["zod", "schema validation", "validación"],
+    group: web,
+    level: "production",
+    where: {
+      es: "itti: validación de formularios y datos de API en Admin y Business Portal",
+      en: "itti: form and API data validation in the Admin and Business portals",
+    },
+  },
+  {
     name: "Design Systems",
     aliases: ["design system", "design systems", "design tokens", "component library", "ui library"],
     group: arch,
@@ -249,99 +269,3 @@ export const skillEvidence: readonly SkillEvidence[] = [
     where: { es: "Formación universitaria", en: "University coursework" },
   },
 ];
-
-/** Common job-post terms outside the current stack, shown neutrally as gaps. */
-export const outsideStack: readonly { name: string; aliases: readonly string[] }[] = [
-  { name: "Vue", aliases: ["vue", "vue.js", "nuxt"] },
-  { name: "React Native", aliases: ["react native"] },
-  { name: "GraphQL", aliases: ["graphql", "apollo"] },
-  { name: "Node.js", aliases: ["node", "node.js", "nodejs", "express", "nestjs"] },
-  { name: "Redux", aliases: ["redux", "zustand"] },
-  { name: "Storybook", aliases: ["storybook"] },
-  { name: "E2E (Cypress / Playwright)", aliases: ["cypress", "playwright", "e2e"] },
-  { name: "Cloud (AWS / GCP)", aliases: ["aws", "gcp", "azure", "cloud"] },
-  { name: "Docker", aliases: ["docker", "kubernetes", "k8s"] },
-];
-
-export const highlights: readonly { value: string; label: L }[] = [
-  { value: "~5", label: { es: "años en fintech (itti), 3+ en frontend con React, Next.js y TypeScript", en: "years in fintech (itti), 3+ in frontend with React, Next.js and TypeScript" } },
-  { value: "3", label: { es: "portales web migrados a Next.js con reescritura completa de la lógica", en: "web portals migrated to Next.js with a full logic rewrite" } },
-  { value: "50+", label: { es: "bugs resueltos en producción con New Relic", en: "production bugs fixed with New Relic" } },
-  { value: "3.º", label: { es: "lugar MentalRiskES 2024 (IberLEF) · F1 0,82", en: "place MentalRiskES 2024 (IberLEF) · F1 0.82" } },
-];
-
-export const presets: readonly { label: L; text: string }[] = [
-  {
-    label: { es: "Frontend React", en: "Frontend React" },
-    text: "Frontend Engineer with React, TypeScript, REST APIs, unit testing, CI/CD, Agile/Scrum, Figma. Nice to have: Next.js, Storybook, Redux.",
-  },
-  {
-    label: { es: "Next.js Engineer", en: "Next.js Engineer" },
-    text: "Software Engineer Next.js App Router, SSR, TypeScript, TanStack Query, design system, monorepo, Vitest, GitHub Actions, observability with New Relic.",
-  },
-  {
-    label: { es: "Fullstack JS", en: "Fullstack JS" },
-    text: "Fullstack Developer: React, Node.js, GraphQL, PostgreSQL, Docker, AWS, Cypress, Git, Scrum. AI tools like Copilot are a plus.",
-  },
-];
-
-function normalize(text: string) {
-  const spaced = ` ${text.toLowerCase().replace(/[^\p{L}\p{N}+#./-]+/gu, " ")} `;
-  const trimmed = spaced.replace(/[./-]+(?=\s)/g, "");
-  return `${trimmed} ${trimmed.replace(/\//g, " ")} `;
-}
-
-function hits(haystack: string, aliases: readonly string[]) {
-  return aliases.some((alias) => haystack.includes(` ${alias.toLowerCase()} `));
-}
-
-export function matchJobPost(text: string) {
-  const haystack = normalize(text);
-  const matched = skillEvidence.filter((skill) => hits(haystack, skill.aliases));
-  const gaps = outsideStack.filter((term) => hits(haystack, term.aliases));
-  const total = matched.length + gaps.length;
-  const coverage = total === 0 ? 0 : Math.round((matched.length / total) * 100);
-  return { matched, gaps, coverage };
-}
-
-export function plainTextProfile(locale: Locale) {
-  const es = locale === "es";
-  const lines = [
-    "Gisselle Barreto",
-    es
-      ? "Software Engineer Frontend · React · Next.js · TypeScript"
-      : "Frontend Software Engineer · React · Next.js · TypeScript",
-    es
-      ? "Paraguay (UTC−3) · Remoto · gibasa96@gmail.com"
-      : "Paraguay (UTC−3) · Remote · gibasa96@gmail.com",
-    "",
-    es ? "EXPERIENCIA" : "EXPERIENCE",
-    es
-      ? "Software Engineer, itti S.A.E.C.A. (Jul 2023 – Actualidad)"
-      : "Software Engineer, itti S.A.E.C.A. (Jul 2023 – Present)",
-    es
-      ? "- Migré 3 portales web a React, Next.js y TypeScript con reescritura completa de la lógica"
-      : "- Migrated 3 web portals to React, Next.js and TypeScript with a full logic rewrite",
-    es
-      ? "- Resolví más de 50 bugs en producción con monitoreo en New Relic"
-      : "- Fixed 50+ production bugs with New Relic monitoring",
-    ...skillEvidence
-      .filter((skill) => skill.level === "production")
-      .map((skill) => `- ${skill.name}: ${skill.where[locale]}`),
-    es
-      ? "QA Tester, itti S.A.E.C.A. (Ene 2022 – Jul 2023) · pruebas funcionales y de usabilidad"
-      : "QA Tester, itti S.A.E.C.A. (Jan 2022 – Jul 2023) · functional and usability testing",
-    es
-      ? "Co-Fundadora y COO, Eduengine (2019 – 2020) · edtech premiado"
-      : "Co-Founder & COO, Eduengine (2019 – 2020) · award-winning edtech",
-    "",
-    es ? "EDUCACIÓN" : "EDUCATION",
-    es
-      ? "Ingeniería en Informática, FP-UNA (2025). Tesis NLP: F1 0,82, 3.º lugar MentalRiskES 2024."
-      : "Computer Engineering, FP-UNA (2025). NLP thesis: F1 0.82, 3rd place MentalRiskES 2024.",
-    "",
-    "SKILLS",
-    skillEvidence.map((skill) => skill.name).join(", "),
-  ];
-  return lines.join("\n");
-}

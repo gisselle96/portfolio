@@ -37,11 +37,11 @@ const es = {
           "Pantallas operativas con listados densos, filtros y formularios: el tipo de UI donde un estado mal resuelto se nota en cada clic.",
         did: [
           "Migré plataformas web existentes a React, Next.js y TypeScript, reescribiendo la lógica y no solo la capa visual.",
-          "Conecté el frontend a microservicios a través de BFF y API Gateway, con TanStack Query para caché e invalidación.",
+          "Conecté el frontend a microservicios a través de BFF y API Gateway, con TanStack Query para caché e invalidación y Zustand para el estado del cliente.",
           "Diseñé estados de carga, vacío y error explícitos para que cada pantalla diga qué está pasando.",
         ],
         short: "Más de 50 bugs de producción resueltos en esas plataformas.",
-        stack: ["React", "Next.js", "TypeScript", "TanStack Query", "BFF · API Gateway"],
+        stack: ["React", "Next.js", "TypeScript", "TanStack Query", "Zustand", "Zod", "BFF · API Gateway"],
       },
       {
         tag: "Features · Flujos",
@@ -49,12 +49,12 @@ const es = {
         summary:
           "Flujos con varios pasos, validación y confirmación, construidos junto a producto, diseño, backend y QA.",
         did: [
-          "Tomo la feature desde el diseño en Figma hasta producción: UI, validaciones, estados y contrato con la API.",
+          "Tomo la feature desde el diseño en Figma hasta producción: UI, validaciones con Zod, estados y contrato con la API.",
           "Pienso los casos borde antes de abrir el PR; es lo que me dejó mi etapa en QA.",
           "Uso desarrollo asistido por IA guiado por specs, y reviso cada diff antes de mergear.",
         ],
         short: "La feature completa en el mismo entregable: UI, datos, estados y tests.",
-        stack: ["React", "TypeScript", "Figma", "Cursor", "Scrum"],
+        stack: ["React", "TypeScript", "Zod", "Figma", "Cursor", "Scrum"],
       },
       {
         tag: "Calidad · Design system",
@@ -201,11 +201,11 @@ const en: EvidenceCopy = {
           "Operational screens with dense listings, filters, and forms: the kind of UI where a poorly handled state shows on every click.",
         did: [
           "Migrated existing web platforms to React, Next.js, and TypeScript, rewriting the logic, not just the visual layer.",
-          "Connected the frontend to microservices through a BFF and API Gateway, with TanStack Query for caching and invalidation.",
+          "Connected the frontend to microservices through a BFF and API Gateway, with TanStack Query for caching and invalidation and Zustand for client state.",
           "Designed explicit loading, empty, and error states so every screen tells you what’s going on.",
         ],
         short: "50+ production bugs fixed on those platforms.",
-        stack: ["React", "Next.js", "TypeScript", "TanStack Query", "BFF · API Gateway"],
+        stack: ["React", "Next.js", "TypeScript", "TanStack Query", "Zustand", "Zod", "BFF · API Gateway"],
       },
       {
         tag: "Features · Flows",
@@ -213,12 +213,12 @@ const en: EvidenceCopy = {
         summary:
           "Multi-step flows with validation and confirmation, built with product, design, backend, and QA.",
         did: [
-          "I take a feature from the Figma design to production: UI, validation, states, and the API contract.",
+          "I take a feature from the Figma design to production: UI, Zod validation, states, and the API contract.",
           "I think through edge cases before opening the PR; that’s what my QA years left me.",
           "I use spec-driven, AI-assisted development and review every diff before merging.",
         ],
         short: "The whole feature in one delivery: UI, data, states, and tests.",
-        stack: ["React", "TypeScript", "Figma", "Cursor", "Scrum"],
+        stack: ["React", "TypeScript", "Zod", "Figma", "Cursor", "Scrum"],
       },
       {
         tag: "Quality · Design system",
