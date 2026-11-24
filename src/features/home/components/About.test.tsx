@@ -8,7 +8,7 @@ describe("About", () => {
     renderWithPreferences(<About />);
     expect(screen.getByRole("link", { name: /descargar cv/i })).toHaveAttribute(
       "href",
-      "/cv/gisselle-barreto.pdf",
+      "/api/cv?photo=1",
     );
   });
 });

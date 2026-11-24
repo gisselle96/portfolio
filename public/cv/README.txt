@@ -1,4 +1,7 @@
-CV actual: gisselle-barreto.pdf
+El CV se genera desde src/features/cv/constants/content.ts:
+- /api/cv?photo=1&lang=es|en  → CV con foto (botón "Descargar CV")
+- /api/cv?lang=es|en          → CV para ATS, sin foto
 
-Para actualizarlo, reemplazá este archivo con la nueva versión
-(mismo nombre: gisselle-barreto.pdf).
+gisselle-barreto.pdf es una copia estática de la versión con foto en español,
+para que los links viejos a /cv/gisselle-barreto.pdf sigan funcionando.
+Si cambiás content.ts, regenerala descargando /api/cv?photo=1 y reemplazando este archivo.

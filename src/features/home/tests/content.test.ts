@@ -6,7 +6,7 @@ describe("home content", () => {
   it("exposes profile basics", () => {
     expect(profile.name).toBe("Gisselle Barreto");
     expect(profile.role).toContain("Software Engineer");
-    expect(profile.cvPath).toBe("/cv/gisselle-barreto.pdf");
+    expect(profile.cvPath).toBe("/api/cv?photo=1");
     expect(profile.atsCvPath).toBe("/api/cv");
   });
 

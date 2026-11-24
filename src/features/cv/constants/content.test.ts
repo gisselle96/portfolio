@@ -6,6 +6,7 @@ describe("cv content", () => {
     expect(cv.name).toBe("Gisselle Barreto");
     expect(cv.role).toContain("Software Engineer");
     expect(cvFileNameFor("en")).toBe("gisselle-barreto-cv-ats-en.pdf");
+    expect(cvFileNameFor("es", { withPhoto: true })).toBe("gisselle-barreto-cv-es.pdf");
   });
 
   it("has experience and skills to regenerate the pdf", () => {
@@ -17,5 +18,6 @@ describe("cv content", () => {
   it("keeps both locales aligned", () => {
     expect(cvByLocale.en.experience.length).toBe(cvByLocale.es.experience.length);
     expect(cvByLocale.en.skills.length).toBe(cvByLocale.es.skills.length);
+    expect(cvByLocale.en.courses.length).toBe(cvByLocale.es.courses.length);
   });
 });

@@ -163,7 +163,7 @@ const es = {
     ],
   },
   contactBio:
-    "Busco roles de Frontend o Software Engineer con React, Next.js y TypeScript, remoto o desde Paraguay (UTC-3). Si tu equipo construye producto y le importa la calidad, escribime.",
+    "¿Te interesa mi perfil? Escribime y conversemos sobre cómo puedo sumar a tu equipo.",
 };
 
 type EvidenceCopy = typeof es;
@@ -327,7 +327,7 @@ const en: EvidenceCopy = {
     ],
   },
   contactBio:
-    "I’m looking for Frontend or Software Engineer roles with React, Next.js, and TypeScript, remote or from Paraguay (UTC-3). If your team builds product and cares about quality, get in touch.",
+    "Interested in my profile? Get in touch and let’s talk about how I can contribute to your team.",
 };
 
 export const evidenceCopy: Record<Locale, EvidenceCopy> = { es, en };

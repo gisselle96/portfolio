@@ -112,7 +112,7 @@ export function LandingCraft() {
               size="lg"
               className="h-12 rounded-md border-line bg-bg-elevated/80 px-5 text-base hover:border-brand hover:text-brand"
             >
-              <a href={profile.cvPath} download>
+              <a href={`${profile.cvPath}&lang=${locale}`} download>
                 <Download className="h-4 w-4" />
                 {copy.hero.ctaCv}
               </a>

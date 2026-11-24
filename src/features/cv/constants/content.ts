@@ -1,7 +1,7 @@
 /**
- * Fuente de verdad del CV para ATS (una columna, texto plano, ES/EN).
- * Actualizá este archivo y el PDF de `/api/cv?lang=es|en` queda al día automáticamente.
- * El PDF diseñado para humanos vive aparte en `public/cv/gisselle-barreto.pdf`.
+ * Fuente de verdad del CV (una columna, texto plano, ES/EN).
+ * Actualizá este archivo y los PDF de `/api/cv?lang=es|en` (ATS, sin foto)
+ * y `/api/cv?photo=1` (con foto) quedan al día automáticamente.
  */
 import type { Locale } from "@/i18n/types";
 
@@ -18,17 +18,16 @@ const contact = {
 
 const es = {
   ...contact,
-  updatedAt: "2026-11-17",
-  role: "Software Engineer | Frontend Developer · React · Next.js · TypeScript",
+  updatedAt: "2026-11-23",
+  role: "Software Engineer · Ingeniera en Informática | React · Next.js · TypeScript · SQL · Python",
   location: "Capiatá, Paraguay · Remoto (UTC-3)",
   headings: {
     contact: "Contacto",
     summary: "Resumen profesional",
     experience: "Experiencia laboral",
     skills: "Habilidades",
+    courses: "Cursos y certificaciones",
     education: "Educación",
-    languages: "Idiomas",
-    updated: "Actualizado",
   },
   labels: {
     linkedin: "LinkedIn",
@@ -36,7 +35,7 @@ const es = {
     portfolio: "Portafolio",
   },
   summary:
-    "Software Engineer (Frontend) con casi 5 años en fintech: más de 3 desarrollando con React, Next.js y TypeScript, y 1,5 en QA. Migré 3 portales web a Next.js reescribiendo su lógica, construyo features de punta a punta sobre microservicios (BFF y API Gateway) y resolví más de 50 bugs en producción con New Relic. Trabajo con desarrollo asistido por IA guiado por specs, tests con Vitest y code review con foco en tipado y calidad.",
+    "Software Engineer e Ingeniera en Informática (UNA, 2025) con casi 5 años en fintech: más de 3 en desarrollo de software (React, Next.js, TypeScript) y 1,5 en QA. Migré 3 portales web reescribiendo su lógica de negocio, integro el frontend con microservicios y resolví más de 50 errores en producción con monitoreo en New Relic. Combino programación, calidad (pruebas automatizadas, testing funcional y code review) y documentación, con base en SQL y Python. Soy proactiva, disfruto trabajar en equipo, tengo un perfil analítico y curioso, y aprendo nuevas herramientas con facilidad.",
   experience: [
     {
       title: "Software Engineer (Frontend)",
@@ -44,14 +43,13 @@ const es = {
       location: "Paraguay",
       period: "Jul 2023 – Actualidad",
       bullets: [
-        "Migré 3 portales web a React, Next.js y TypeScript, reescribiendo la lógica de negocio y no solo la capa visual.",
-        "Integré el frontend con microservicios a través de BFF y API Gateway, con TanStack Query para caché y estados de red, Zustand para el estado del cliente y Zod para validar formularios y datos.",
+        "Migré 3 portales web a React, Next.js y TypeScript, analizando y reescribiendo la lógica de negocio más allá de la capa visual.",
+        "Integré el frontend con microservicios (BFF y API Gateway), validando las respuestas de los servicios en Postman y usando TanStack Query, Zustand y Zod para caché, estado del cliente y validación de datos.",
         "Desarrollo features de punta a punta, del diseño en Figma a producción: UI, validaciones, estados de carga, vacío y error, y contrato con la API.",
-        "Construí componentes reutilizables sobre el design system compartido entre productos.",
-        "Escribí tests unitarios con Vitest para hooks y componentes, y acompañé al equipo en su adopción.",
-        "Rastreé y resolví más de 50 bugs en producción con monitoreo en New Relic.",
-        "Hago code review de PRs con foco en tipado, refactors y cobertura de tests.",
-        "Aplico desarrollo asistido por IA guiado por specs (Cursor, Spec Kit, Claude, Gemini) y reviso cada diff antes del merge.",
+        "Construí componentes reutilizables en el monorepo del design system compartido entre productos, documentados y probados en Storybook.",
+        "Monitoreo los sistemas en producción con New Relic: rastreé y resolví más de 50 errores.",
+        "Automatizo pruebas de hooks y componentes con Vitest y React Testing Library, y acompañé al equipo en su adopción.",
+        "Aplico desarrollo asistido por IA guiado por specs (Cursor, Spec Kit, Claude, Gemini), apoyé su adopción en el equipo y reviso PRs con foco en tipado, refactors y cobertura de tests antes del merge.",
       ],
     },
     {
@@ -62,7 +60,7 @@ const es = {
       bullets: [
         "Planifiqué y ejecuté pruebas funcionales y de usabilidad de productos digitales fintech.",
         "Documenté hallazgos y validé correcciones junto al equipo de desarrollo.",
-        "Trabajé en squads con producto, diseño y desarrollo dentro de sprints Scrum.",
+        "Colaboré en squads con producto, diseño y desarrollo dentro de sprints Scrum, proponiendo mejoras.",
       ],
     },
     {
@@ -71,40 +69,52 @@ const es = {
       location: "Paraguay",
       period: "2019 – 2020",
       bullets: [
-        "Co-fundé un emprendimiento edtech premiado (Tigo Campus Party, Kuña Mbaretech, entre otros), a cargo de operación y producto.",
-        "Prioricé y lancé producto con un equipo chico.",
+        "Co-fundé un emprendimiento edtech premiado (Tigo Campus Party, Kuña Mbaretech, entre otros).",
+        "Estuve a cargo de la operación y el producto: organicé procesos y prioricé lanzamientos con un equipo chico.",
       ],
     },
   ],
   skills: [
     {
       label: "Frontend",
-      items: ["React (React.js)", "Next.js", "TypeScript", "JavaScript", "HTML", "CSS", "TanStack Query", "Zustand", "Zod", "Design Systems"],
+      items: ["React", "Next.js", "TypeScript", "JavaScript", "HTML", "CSS", "TanStack Query", "Zustand", "Zod", "Design Systems", "Storybook"],
     },
     {
-      label: "Arquitectura",
-      items: ["Microservicios", "BFF", "API Gateway", "Integración de APIs"],
+      label: "Arquitectura e integración",
+      items: ["Microservicios", "BFF", "API Gateway", "Integración de APIs", "Postman"],
+    },
+    {
+      label: "Datos",
+      items: ["SQL", "PostgreSQL", "MongoDB", "Python"],
     },
     {
       label: "Testing y calidad",
-      items: ["Vitest", "Tests unitarios", "Testing funcional", "Testing de usabilidad", "QA", "Code review"],
+      items: ["Vitest", "React Testing Library", "Pruebas automatizadas", "Testing funcional y de usabilidad", "QA", "Code review"],
     },
     {
-      label: "DevOps y monitoreo",
-      items: ["Git", "GitHub", "GitLab", "Bitbucket", "CI/CD", "GitHub Actions", "New Relic"],
+      label: "DevOps, monitoreo y analítica",
+      items: ["Git", "GitHub", "GitLab", "Bitbucket", "CI/CD", "GitHub Actions", "New Relic", "Google Analytics"],
     },
     {
       label: "IA aplicada",
-      items: ["Cursor", "Spec Kit", "Claude", "Gemini", "Desarrollo asistido por IA", "Spec-driven development"],
+      items: ["Cursor", "Spec Kit", "Claude", "Gemini", "Desarrollo guiado por specs"],
     },
     {
       label: "Metodologías y herramientas",
-      items: ["Scrum", "Agile", "Jira", "Figma", "UX/UI"],
+      items: ["Scrum", "Agile", "Jira", "Figma", "Paquete Office"],
     },
     {
       label: "Conocimientos",
-      items: ["Angular", "Python", "Java", "PostgreSQL", "MongoDB"],
+      items: ["Angular", "Java"],
     },
+  ],
+  courses: [
+    "Introducción a la Automatización de Pruebas UI Web con Playwright — itti, 2024",
+    "Shadcn/ui: Componentes accesibles y personalizables — DevTalles, 2025",
+    "Gen AI Fundamentos — AWS, 2026",
+    "Inteligencia artificial: IA para Todos (itti, 2025) · IA Academy: Prompt Engineering, NotebookLM, Gemini y Workspace, Gemini y Apps Script, Mindset IA",
+    "FinOps: Gestión Financiera en la Nube — itti, 2025",
+    "Seguridad de la información: Norma ISO 27001, Ciberseguridad y Privacidad de datos — itti, 2024–2026",
   ],
   education: [
     {
@@ -115,27 +125,22 @@ const es = {
         "Tesis: modelo de clasificación para detectar depresión y ansiedad en usuarios de Telegram, con procesamiento de lenguaje natural (NLP) e ingeniería de características en Python (Random Forest, LightGBM, XGBoost). F1-Score de 0,82, equivalente al 3.º lugar del desafío MentalRiskES 2024 (IberLEF).",
     },
   ],
-  languages: [
-    { label: "Español", level: "Nativo" },
-    { label: "Inglés", level: "Básico-intermedio" },
-  ],
 };
 
 type CvData = typeof es;
 
 const en: CvData = {
   ...contact,
-  updatedAt: "2026-11-17",
-  role: "Software Engineer | Frontend Developer · React · Next.js · TypeScript",
+  updatedAt: "2026-11-23",
+  role: "Software Engineer · Computer Engineer | React · Next.js · TypeScript · SQL · Python",
   location: "Capiatá, Paraguay · Remote (UTC-3)",
   headings: {
     contact: "Contact",
     summary: "Professional Summary",
     experience: "Work Experience",
     skills: "Skills",
+    courses: "Courses & Certifications",
     education: "Education",
-    languages: "Languages",
-    updated: "Updated",
   },
   labels: {
     linkedin: "LinkedIn",
@@ -143,7 +148,7 @@ const en: CvData = {
     portfolio: "Portfolio",
   },
   summary:
-    "Software Engineer (Frontend) with almost 5 years in fintech: 3+ building with React, Next.js, and TypeScript, and 1.5 in QA. Migrated 3 web portals to Next.js by rewriting their logic, build end-to-end features on microservices (BFF and API Gateway), and fixed 50+ production bugs with New Relic. I work with spec-driven, AI-assisted development, Vitest testing, and code review focused on typing and quality.",
+    "Software Engineer and Computer Engineer (UNA, 2025) with almost 5 years in fintech: 3+ in software development (React, Next.js, TypeScript) and 1.5 in QA. Migrated 3 web portals by rewriting their business logic, integrated the frontend with microservices, and fixed 50+ production issues using New Relic monitoring. Combines programming, quality (automated testing, functional testing, and code review), and documentation, with a foundation in SQL and Python. Proactive, collaborative, analytical, and curious, with a knack for picking up new tools.",
   experience: [
     {
       title: "Software Engineer (Frontend)",
@@ -151,14 +156,13 @@ const en: CvData = {
       location: "Paraguay",
       period: "Jul 2023 – Present",
       bullets: [
-        "Migrated 3 web portals to React, Next.js, and TypeScript, rewriting the business logic, not just the visual layer.",
-        "Integrated the frontend with microservices through a BFF and API Gateway, with TanStack Query for caching and network states, Zustand for client state, and Zod for form and data validation.",
+        "Migrated 3 web portals to React, Next.js, and TypeScript, analyzing and rewriting the business logic beyond the visual layer.",
+        "Integrated the frontend with microservices (BFF and API Gateway), validating service responses in Postman and using TanStack Query, Zustand, and Zod for caching, client state, and data validation.",
         "Build end-to-end features, from Figma design to production: UI, validation, loading, empty, and error states, and the API contract.",
-        "Built reusable components on the design system shared across products.",
-        "Wrote unit tests with Vitest for hooks and components and helped the team adopt them.",
-        "Traced and fixed 50+ production bugs using New Relic monitoring.",
-        "Review pull requests with a focus on typing, refactoring, and test coverage.",
-        "Apply spec-driven, AI-assisted development (Cursor, Spec Kit, Claude, Gemini) and review every diff before merging.",
+        "Built reusable components in the design system monorepo shared across products, documented and tested in Storybook.",
+        "Monitor production systems with New Relic: traced and fixed 50+ issues.",
+        "Automate hook and component tests with Vitest and React Testing Library, and supported the team in adopting them.",
+        "Apply spec-driven, AI-assisted development (Cursor, Spec Kit, Claude, Gemini), supported its adoption across the team, and review pull requests for typing, refactoring, and test coverage before merging.",
       ],
     },
     {
@@ -169,7 +173,7 @@ const en: CvData = {
       bullets: [
         "Planned and executed functional and usability testing of fintech digital products.",
         "Documented findings and validated fixes with the development team.",
-        "Worked in squads with product, design, and engineering in Scrum sprints.",
+        "Collaborated in squads with product, design, and engineering in Scrum sprints, proposing improvements.",
       ],
     },
     {
@@ -178,40 +182,52 @@ const en: CvData = {
       location: "Paraguay",
       period: "2019 – 2020",
       bullets: [
-        "Co-founded an award-winning edtech startup (Tigo Campus Party, Kuña Mbaretech, and others), leading operations and product.",
-        "Prioritized and shipped product with a small team.",
+        "Co-founded an award-winning edtech startup (Tigo Campus Party, Kuña Mbaretech, and others).",
+        "Led operations and product: organized processes and prioritized launches with a small team.",
       ],
     },
   ],
   skills: [
     {
       label: "Frontend",
-      items: ["React (React.js)", "Next.js", "TypeScript", "JavaScript", "HTML", "CSS", "TanStack Query", "Zustand", "Zod", "Design Systems"],
+      items: ["React", "Next.js", "TypeScript", "JavaScript", "HTML", "CSS", "TanStack Query", "Zustand", "Zod", "Design Systems", "Storybook"],
     },
     {
-      label: "Architecture",
-      items: ["Microservices", "BFF", "API Gateway", "API integration"],
+      label: "Architecture & Integration",
+      items: ["Microservices", "BFF", "API Gateway", "API integration", "Postman"],
+    },
+    {
+      label: "Data",
+      items: ["SQL", "PostgreSQL", "MongoDB", "Python"],
     },
     {
       label: "Testing & Quality",
-      items: ["Vitest", "Unit testing", "Functional testing", "Usability testing", "QA", "Code review"],
+      items: ["Vitest", "React Testing Library", "Automated testing", "Functional and usability testing", "QA", "Code review"],
     },
     {
-      label: "DevOps & Monitoring",
-      items: ["Git", "GitHub", "GitLab", "Bitbucket", "CI/CD", "GitHub Actions", "New Relic"],
+      label: "DevOps, Monitoring & Analytics",
+      items: ["Git", "GitHub", "GitLab", "Bitbucket", "CI/CD", "GitHub Actions", "New Relic", "Google Analytics"],
     },
     {
       label: "Applied AI",
-      items: ["Cursor", "Spec Kit", "Claude", "Gemini", "AI-assisted development", "Spec-driven development"],
+      items: ["Cursor", "Spec Kit", "Claude", "Gemini", "Spec-driven development"],
     },
     {
       label: "Methodologies & Tools",
-      items: ["Scrum", "Agile", "Jira", "Figma", "UX/UI"],
+      items: ["Scrum", "Agile", "Jira", "Figma", "Microsoft Office"],
     },
     {
       label: "Familiar with",
-      items: ["Angular", "Python", "Java", "PostgreSQL", "MongoDB"],
+      items: ["Angular", "Java"],
     },
+  ],
+  courses: [
+    "Introduction to Web UI Test Automation with Playwright — itti, 2024",
+    "Shadcn/ui: Accessible and Customizable Components — DevTalles, 2025",
+    "Gen AI Fundamentals — AWS, 2026",
+    "Artificial intelligence: AI for Everyone (itti, 2025) · IA Academy: Prompt Engineering, NotebookLM, Gemini & Workspace, Gemini & Apps Script, AI Mindset",
+    "FinOps: Cloud Financial Management — itti, 2025",
+    "Information security: ISO 27001 Awareness, Cybersecurity, and Data Privacy — itti, 2024–2026",
   ],
   education: [
     {
@@ -222,16 +238,14 @@ const en: CvData = {
         "Thesis: classification model to detect depression and anxiety in Telegram users, using natural language processing (NLP) and feature engineering in Python (Random Forest, LightGBM, XGBoost). F1-score of 0.82, equivalent to 3rd place in the MentalRiskES 2024 challenge (IberLEF).",
     },
   ],
-  languages: [
-    { label: "Spanish", level: "Native" },
-    { label: "English", level: "Basic-intermediate" },
-  ],
 };
 
 export const cvByLocale: Record<Locale, CvData> = { es, en };
 
 export const cv = es;
 
-export function cvFileNameFor(locale: Locale) {
-  return `gisselle-barreto-cv-ats-${locale}.pdf`;
+export function cvFileNameFor(locale: Locale, { withPhoto = false } = {}) {
+  return withPhoto
+    ? `gisselle-barreto-cv-${locale}.pdf`
+    : `gisselle-barreto-cv-ats-${locale}.pdf`;
 }

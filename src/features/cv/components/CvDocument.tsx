@@ -1,6 +1,7 @@
 import {
   Document,
   Font,
+  Image,
   Page,
   StyleSheet,
   Text,
@@ -21,6 +22,20 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica",
     color: "#101820",
     lineHeight: 1.25,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
+  },
+  headerText: {
+    flex: 1,
+  },
+  photo: {
+    width: 76,
+    height: 76,
+    borderRadius: 38,
+    objectFit: "cover",
   },
   name: {
     fontSize: 20,
@@ -53,11 +68,6 @@ const styles = StyleSheet.create({
   job: {
     marginBottom: 6,
   },
-  jobHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: 12,
-  },
   jobTitle: {
     fontFamily: "Helvetica-Bold",
     fontSize: 10.5,
@@ -77,17 +87,14 @@ const styles = StyleSheet.create({
   bold: {
     fontFamily: "Helvetica-Bold",
   },
-  footer: {
-    position: "absolute",
-    bottom: 24,
-    left: 48,
-    right: 48,
-    fontSize: 8,
-    color: "#6b7780",
-  },
 });
 
-export function CvDocument({ locale = "es" }: { locale?: Locale } = {}) {
+type CvDocumentProps = {
+  locale?: Locale;
+  photoSrc?: string;
+};
+
+export function CvDocument({ locale = "es", photoSrc }: CvDocumentProps = {}) {
   const cv = cvByLocale[locale];
 
   return (
@@ -99,17 +106,23 @@ export function CvDocument({ locale = "es" }: { locale?: Locale } = {}) {
       language={locale}
     >
       <Page size="A4" style={styles.page}>
-        <Text style={styles.name}>{cv.name}</Text>
-        <Text style={styles.role}>{cv.role}</Text>
-        <Text style={styles.contactLine}>
-          {`${cv.location} · ${cv.email} · ${cv.phone}`}
-        </Text>
-        <Text style={styles.contactLine}>
-          {`${cv.labels.linkedin}: ${cv.links.linkedin}`}
-        </Text>
-        <Text style={styles.contactLine}>
-          {`${cv.labels.github}: ${cv.links.github} · ${cv.labels.portfolio}: ${cv.links.portfolio}`}
-        </Text>
+        <View style={styles.header}>
+          {/* eslint-disable-next-line jsx-a11y/alt-text -- react-pdf Image has no alt prop */}
+          {photoSrc ? <Image src={photoSrc} style={styles.photo} /> : null}
+          <View style={styles.headerText}>
+            <Text style={styles.name}>{cv.name}</Text>
+            <Text style={styles.role}>{cv.role}</Text>
+            <Text style={styles.contactLine}>
+              {`${cv.location} · ${cv.email} · ${cv.phone}`}
+            </Text>
+            <Text style={styles.contactLine}>
+              {`${cv.labels.linkedin}: ${cv.links.linkedin}`}
+            </Text>
+            <Text style={styles.contactLine}>
+              {`${cv.labels.github}: ${cv.links.github} · ${cv.labels.portfolio}: ${cv.links.portfolio}`}
+            </Text>
+          </View>
+        </View>
 
         <Text style={styles.sectionTitle}>{cv.headings.summary}</Text>
         <Text style={styles.paragraph}>{cv.summary}</Text>
@@ -117,12 +130,9 @@ export function CvDocument({ locale = "es" }: { locale?: Locale } = {}) {
         <Text style={styles.sectionTitle}>{cv.headings.experience}</Text>
         {cv.experience.map((job) => (
           <View key={`${job.title}-${job.period}`} style={styles.job} wrap={false}>
-            <View style={styles.jobHeader}>
-              <Text style={styles.jobTitle}>{job.title}</Text>
-              <Text style={styles.jobMeta}>{job.period}</Text>
-            </View>
+            <Text style={styles.jobTitle}>{job.title}</Text>
             <Text style={styles.jobMeta}>
-              {job.company} · {job.location}
+              {`${job.company} · ${job.location} · ${job.period}`}
             </Text>
             {job.bullets.map((bullet) => (
               <Text key={bullet} style={styles.bullet}>
@@ -140,26 +150,23 @@ export function CvDocument({ locale = "es" }: { locale?: Locale } = {}) {
           </Text>
         ))}
 
+        <View wrap={false}>
+          <Text style={styles.sectionTitle}>{cv.headings.courses}</Text>
+          {cv.courses.map((course) => (
+            <Text key={course} style={styles.bullet}>
+              • {course}
+            </Text>
+          ))}
+        </View>
+
         <Text style={styles.sectionTitle}>{cv.headings.education}</Text>
         {cv.education.map((item) => (
           <View key={item.title} wrap={false}>
-            <View style={styles.jobHeader}>
-              <Text style={styles.jobTitle}>{item.title}</Text>
-              <Text style={styles.jobMeta}>{item.period}</Text>
-            </View>
-            <Text style={styles.jobMeta}>{item.school}</Text>
+            <Text style={styles.jobTitle}>{item.title}</Text>
+            <Text style={styles.jobMeta}>{`${item.school} · ${item.period}`}</Text>
             <Text style={styles.paragraph}>{item.detail}</Text>
           </View>
         ))}
-
-        <Text style={styles.sectionTitle}>{cv.headings.languages}</Text>
-        <Text style={styles.paragraph}>
-          {cv.languages.map((item) => `${item.label}: ${item.level}`).join(" · ")}
-        </Text>
-
-        <Text style={styles.footer} fixed>
-          {`${cv.headings.updated} ${cv.updatedAt}`}
-        </Text>
       </Page>
     </Document>
   );
